@@ -301,7 +301,7 @@ body {
 }
 
 .presentation_img {
-  background-image: url(public/logos/Logo.jpg);
+  background-image: url(/public/logos/Logo.jpg);
   width: 600px;
   height: 600px;
   background-color: transparent;
@@ -326,15 +326,15 @@ body {
 }
 
 .navigation {
-  background-image: url(public/logos/navigation.png);
+  background-image: url(/public/logos/navigation.png);
 }
 
 .clock {
-  background-image: url(public/logos/clock.png);
+  background-image: url(/public/logos/clock.png);
 }
 
 .phone {
-  background-image: url(public/logos/phone-call.png);
+  background-image: url(/public/logos/phone-call.png);
 }
 
 .location {
@@ -738,20 +738,20 @@ a:hover {
   box-sizing: border-box;
   -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
-  background-image: url("public/restaurant/restaurant1.jpg");
+  background-image: url("/public/restaurant/restaurant1.jpg");
   animation: border-transform 6s linear infinite alternate forwards;
   -webkit-animation-play-state: paused;
   -moz-animation-play-state: paused;
   animation-play-state: paused;
 }
 .checkbox.scnd + label {
-  background-image: url("public/restaurant/restaurant2.jpg");
+  background-image: url("/public/restaurant/restaurant2.jpg");
 }
 .checkbox.thrd + label {
-  background-image: url("public/restaurant/restaurant3.jpg");
+  background-image: url("/public/restaurant/restaurant3.jpg");
 }
 .checkbox.foth + label {
-  background-image: url("public/restaurant/restaurant4.jpg");
+  background-image: url("/public/restaurant/restaurant4.jpg");
 }
 
 .checkbox:checked + label {
@@ -815,7 +815,7 @@ a:hover {
   border: 5px solid rgba(65, 170, 33, 0.74);
   background-size: cover;
   background-position: center;
-  background-image: url("public/restaurant/restaurant1.jpg");
+  background-image: url("/public/restaurant/restaurant1.jpg");
   border-radius: 50%;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
@@ -836,13 +836,13 @@ a:hover {
   mix-blend-mode: difference;
 }
 .section-bottom ul li:nth-child(2) {
-  background-image: url("public/restaurant/restaurant2.jpg");
+  background-image: url("/public/restaurant/restaurant2.jpg");
 }
 .section-bottom ul li:nth-child(3) {
-  background-image: url("public/restaurant/restaurant3.jpg");
+  background-image: url("/public/restaurant/restaurant3.jpg");
 }
 .section-bottom ul li:nth-child(4) {
-  background-image: url("public/restaurant/restaurant4.jpg");
+  background-image: url("/public/restaurant/restaurant4.jpg");
 }
 
 .checkbox.frst:checked ~ ul li:nth-child(1) {
