@@ -217,6 +217,7 @@ body {
 @media (max-width: 768px) {
   .landing .title_container {
     transform: translateY(-200%);
+    width: 80%;
     opacity: 0;
   }
 
