@@ -163,7 +163,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  width: 30%;
+  width: 450px;
   height: 70%;
   border-radius: 5%;
   background: linear-gradient(
@@ -188,6 +188,7 @@ body {
   opacity: 0;
 }
 
+
 .landing .title_container h1 {
   font-size: 4em;
   color: transparent;
@@ -210,6 +211,22 @@ body {
   text-align: center;
   transform: translateY(-80%);
 }
+
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .landing .title_container {
+    transform: translateY(-200%);
+    opacity: 0;
+  }
+
+  .landing .title_container_scrolled {
+    transform: translateY(-200%); /* Adjust the transform to move out of view */
+    opacity: 0;
+  }
+
+}
+
 
 /* Styling for the separation*/
 
