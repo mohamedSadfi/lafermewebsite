@@ -38,7 +38,9 @@ document.addEventListener("DOMContentLoaded", function () {
       fixed_nav.classList.add("transition-navbar");
       fixed_nav.classList.remove("fixed-navbar");
       divider.style.transform = "rotate(180deg) translateY(0%)";
-      navbar_items.style.backgroundColor = "rgb(178, 221, 48, 1)";
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        navbar_items.style.backgroundColor = "rgb(178, 221, 48, 1)";
+      }
       // console.log("transition added");
       transition_added = true;
     } else if (window.scrollY < 150 && transition_added) {
@@ -46,7 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
       fixed_nav.classList.remove("transition-navbar");
       fixed_nav.classList.remove("fixed-navbar");
       divider.style.transform = "rotate(180deg) translateY(-100%)";
-      navbar_items.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        navbar_items.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+      }
       // console.log("transition removed");
       transition_added = false;
     }
@@ -213,11 +217,11 @@ document.addEventListener("DOMContentLoaded", function () {
     html.classList.toggle("no-scroll");
   });
 
-  navbarItems.forEach(item => {
+  navbarItems.forEach((item) => {
     item.addEventListener("click", function () {
       navbar.classList.remove("active");
       menuToggle.classList.remove("active");
       html.classList.remove("no-scroll");
-    })
+    });
   });
 });
