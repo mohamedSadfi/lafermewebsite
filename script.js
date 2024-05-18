@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var divider = document.querySelector(
     ".custom-shape-divider-bottom-1713610940"
   );
+  var navbar_items = document.getElementById("navbar-items");
   var transition_added = false;
   var fixed_added = false;
 
@@ -37,14 +38,16 @@ document.addEventListener("DOMContentLoaded", function () {
       fixed_nav.classList.add("transition-navbar");
       fixed_nav.classList.remove("fixed-navbar");
       divider.style.transform = "rotate(180deg) translateY(0%)";
-      console.log("transition added");
+      navbar_items.style.backgroundColor = "rgb(178, 221, 48, 1)";
+      // console.log("transition added");
       transition_added = true;
     } else if (window.scrollY < 150 && transition_added) {
       // Remove the 'scrolled' class if the user scrolls to the top
       fixed_nav.classList.remove("transition-navbar");
       fixed_nav.classList.remove("fixed-navbar");
       divider.style.transform = "rotate(180deg) translateY(-100%)";
-      console.log("transition removed");
+      navbar_items.style.backgroundColor = "rgba(255, 255, 255, 0.9)";
+      // console.log("transition removed");
       transition_added = false;
     }
 
@@ -195,5 +198,26 @@ document.addEventListener("DOMContentLoaded", () => {
   // Observe all sections
   document.querySelectorAll(".section").forEach((section) => {
     observer.observe(section);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navbar = document.querySelector(".text-navbar");
+  const navbarItems = document.querySelectorAll(".text-navbar a");
+  const html = document.documentElement;
+
+  menuToggle.addEventListener("click", function () {
+    navbar.classList.toggle("active");
+    menuToggle.classList.toggle("active");
+    html.classList.toggle("no-scroll");
+  });
+
+  navbarItems.forEach(item => {
+    item.addEventListener("click", function () {
+      navbar.classList.remove("active");
+      menuToggle.classList.remove("active");
+      html.classList.remove("no-scroll");
+    })
   });
 });
