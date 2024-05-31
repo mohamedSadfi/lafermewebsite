@@ -332,7 +332,6 @@ body {
   );
   background-color: transparent;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 20px;
   position: relative;
@@ -365,7 +364,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
-  transform: translateX(-110%) scale(0.9);
+  transform: translateX(-140%) scale(0.9);
   transition: all 1s ease-in-out;
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
@@ -483,6 +482,71 @@ body {
   font-style: italic;
 }
 
+
+
+@media (max-width: 768px) {
+
+  .presentation {
+    background: linear-gradient(
+    to top,
+    rgb(178, 221, 48, 0.8),
+    rgb(178, 221, 48, 1)
+  );
+  height: 1400px;
+  }
+
+
+  .presentation .container {
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .presentation_card {
+    width: 80%;
+    align-items: center;
+    margin-top: 0;
+  }
+
+  .presentation_card h1 {
+    font-size: 1.4em;
+  }
+
+  .presentation_card p {
+    text-align: center;
+    font-size: 0.9em;
+  }
+
+  .presentation_img {
+    display: none;
+  }
+
+  .cards {
+    height: 300px;
+    padding-top: 40px;
+  }
+
+  .navigation,
+  .clock,
+  .phone {
+    width: 50px;
+    height: 50px;
+  }
+
+  .location p, a {
+    font-size: 0.9em;
+  }
+
+  .opening_hours {
+    font-size: 0.9em;
+  }
+
+  .phone-number {
+    font-size: 0.9em;
+  }
+
+}
+
 /* Styles for the transition to the market */
 
 .market {
@@ -545,6 +609,30 @@ body {
 .custom-shape-divider-top-1714231224 .shape-fill {
   fill: rgb(178, 221, 48, 1);
 }
+
+
+
+@media (max-width: 768px) {
+  .market {
+    background: linear-gradient(
+    to bottom,
+    rgb(178, 221, 48, 0.8),
+    rgb(178, 221, 48, 1)
+  );
+  }
+  
+  .market .container h3 {
+    font-size: 2.5em;
+  }
+
+  .market .container p {
+    font-size: 0.9em;
+  }
+
+}
+
+
+
 
 /* Styling for the image slider */
 

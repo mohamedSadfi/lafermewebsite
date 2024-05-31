@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
               var divider = entry.target.querySelector(
                 ".custom-shape-divider-bottom-1713610940"
               );
-              presentationText.style.transform = "translateX(-110%)";
+              presentationText.style.transform = "translateX(-140%)";
               presentationImage.style.transform =
                 "translateX(200%) rotate(180deg) translateY(20%)";
               divider.style.transform = "rotate(-180deg) translateY(-100%)";
