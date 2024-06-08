@@ -371,7 +371,7 @@ body {
 
 .presentation_card h1 {
   font-size: 3em;
-  color: white;
+  color: rgba(65, 170, 33, 0.74);
   text-align: center;
   margin-bottom: 30px;
 }
@@ -380,7 +380,7 @@ body {
   font-size: 1.5em;
   line-height: 1.5;
   max-width: 90%;
-  color: #fff;
+  color: rgba(65, 170, 33, 0.74);
   text-align: left;
 }
 
@@ -482,19 +482,15 @@ body {
   font-style: italic;
 }
 
-
-
 @media (max-width: 768px) {
-
   .presentation {
     background: linear-gradient(
-    to top,
-    rgb(178, 221, 48, 0.8),
-    rgb(178, 221, 48, 1)
-  );
-  height: 1400px;
+      to top,
+      rgb(178, 221, 48, 0.8),
+      rgb(178, 221, 48, 1)
+    );
+    height: 1400px;
   }
-
 
   .presentation .container {
     position: relative;
@@ -533,7 +529,8 @@ body {
     height: 50px;
   }
 
-  .location p, a {
+  .location p,
+  a {
     font-size: 0.9em;
   }
 
@@ -544,7 +541,6 @@ body {
   .phone-number {
     font-size: 0.9em;
   }
-
 }
 
 /* Styles for the transition to the market */
@@ -610,17 +606,15 @@ body {
   fill: rgb(178, 221, 48, 1);
 }
 
-
-
 @media (max-width: 768px) {
   .market {
     background: linear-gradient(
-    to bottom,
-    rgb(178, 221, 48, 0.8),
-    rgb(178, 221, 48, 1)
-  );
+      to bottom,
+      rgb(178, 221, 48, 0.8),
+      rgb(178, 221, 48, 1)
+    );
   }
-  
+
   .market .container h3 {
     font-size: 2.5em;
   }
@@ -628,11 +622,7 @@ body {
   .market .container p {
     font-size: 0.9em;
   }
-
 }
-
-
-
 
 /* Styling for the image slider */
 
@@ -690,11 +680,11 @@ body {
   top: 50%;
   left: 100px;
   width: 400px;
-  background: linear-gradient(
+  /* background: linear-gradient(
     to bottom right,
     rgb(255, 255, 255, 0),
-    rgb(255, 255, 255, 0.8)
-  );
+    rgb(178, 221, 48, 0.4)
+    /* rgba(213, 231, 17, 0.8) */
   border-radius: 5%;
   padding: 10px;
   text-align: left;
@@ -709,8 +699,9 @@ body {
 }
 
 .content .name {
-  color: rgba(65, 170, 33, 0.74);
+  color: #f0960f;
   font-size: 40px;
+  font-style: italic;
   text-transform: uppercase;
   font-weight: bold;
   opacity: 0;
@@ -719,7 +710,8 @@ body {
 
 .content .des {
   font-size: 1.2em;
-  color: rgba(65, 170, 33, 0.74);
+  color: rgb(108, 63, 26);
+    font-weight: bold;
   margin-top: 10px;
   margin-bottom: 20px;
   opacity: 0;
@@ -777,17 +769,87 @@ body {
 .button button {
   width: 40px;
   height: 35px;
+  color: #fddc0a;
   border-radius: 8px;
   border: none;
   cursor: pointer;
   margin: 0 5px;
   border: 1px solid #000;
   transition: 0.3s;
+  background-color: #f0960f;
 }
 
 .button button:hover {
-  background: #ababab;
-  color: #fff;
+  background: #fddc0a;
+  color: #f0960f;
+}
+
+@media (max-width: 768px) {
+  .image_container {
+    height: 70vh;
+  }
+
+  .slide .item:nth-child(3) {
+    left: 100%;
+  }
+
+  .slide .item:nth-child(4) {
+    left: calc(100% + 210px);
+  }
+
+  .slide .item:nth-child(5) {
+    left: calc(100% + 430px);
+  }
+
+  .slide .item:nth-child(n + 6) {
+    left: calc(100% + 650px);
+  }
+
+
+  .item .content {
+    left: 10%;
+    justify-content: center;
+    text-align: center;
+    top: 20%;
+    width: 200px;
+    
+  }
+
+  .content .name {
+    font-size: 30px;
+    cursor: pointer;
+    transition: all 0.5s;
+  }
+
+  .content .des {
+    font-size: 0.9em;
+    display: none;
+  }
+
+  .content.show-description .des {
+    display: block;
+  }
+
+  .content.show-description {
+    max-height: 300px;
+    transition: all 0.5s ease-in-out;
+    background: linear-gradient(
+    to bottom right,
+    rgb(255, 255, 255, 0),
+    #e9b32b);
+    
+  }
+
+  .content.content.show-description .name {
+    font-size: 23px;
+    transition: all 0.5s;
+    background-color: transparent;
+  }
+
+  .button {
+    z-index: 10;
+  }
+
 }
 
 /* Styles for the restaurant section*/

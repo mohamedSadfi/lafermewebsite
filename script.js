@@ -11,6 +11,16 @@ $prev.addEventListener("click", () => {
   document.querySelector(".slide").prepend(items[items.length - 1]);
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const names = document.querySelectorAll(".content .name");
+  names.forEach((name) => {
+    name.addEventListener("click", () => {
+      const content = name.parentElement;
+      content.classList.toggle("show-description");
+    });
+  });
+})
+
 // document.addEventListener("DOMContentLoaded", function () {
 //   function ChangeImage() {
 //     const items = document.querySelectorAll(".item");
