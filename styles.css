@@ -52,7 +52,7 @@ body {
   align-items: center;
   position: relative;
   text-decoration: wavy;
-  color: #41aa21bd; /* Initial text color */
+  color: rgba(24, 95, 3, 0.74); /* Initial text color */
   font-size: 25px;
   font-weight: normal;
   transition: color 1s ease-in-out, transform 300ms, font-size 300ms,
@@ -203,7 +203,11 @@ body {
 .landing .title_container h1 {
   font-size: 4em;
   color: transparent;
-  background: linear-gradient(to left, rgba(65, 170, 33, 0.4), #41aa21bd);
+  background: linear-gradient(
+    to left,
+    rgba(65, 170, 33, 0.4),
+    rgba(24, 95, 3, 0.74)
+  );
   -webkit-background-clip: text; /* For Safari */
   background-clip: text;
   background-color: transparent;
@@ -224,6 +228,28 @@ body {
 }
 
 /* Media query for mobile devices */
+
+@media (max-width: 1024px) {
+  .landing .title_container {
+    width: 80%;
+    opacity: 0;
+    height: 400px;
+  }
+
+  .landing .title_container_scrolled {
+    opacity: 0;
+  }
+
+  .landing .title_container h1 {
+    font-size: 5em;
+    transform: translateY(-10%);
+  }
+
+  .landing .title_container p {
+    transform: translateY(-15%);
+  }
+}
+
 @media (max-width: 768px) {
   .landing .title_container {
     width: 80%;
@@ -371,7 +397,7 @@ body {
 
 .presentation_card h1 {
   font-size: 3em;
-  color: rgba(65, 170, 33, 0.74);
+  color: rgba(24, 95, 3, 0.74);
   text-align: center;
   margin-bottom: 30px;
 }
@@ -380,7 +406,7 @@ body {
   font-size: 1.5em;
   line-height: 1.5;
   max-width: 90%;
-  color: rgba(65, 170, 33, 0.74);
+  color: rgba(24, 95, 3, 0.74);
   text-align: left;
 }
 
@@ -475,11 +501,22 @@ body {
 
 .presentation .bottom p {
   text-align: center;
-  color: rgba(65, 170, 33, 0.74);
+  color: rgba(24, 95, 3, 0.74);
   max-width: 80%;
   margin: auto;
   font-size: 1.1em;
   font-style: italic;
+}
+
+@media (max-width: 1024px) {
+  .presentation_img {
+    width: 400px;
+    height: 400px;
+  }
+
+  .presentation_card {
+    width: 60%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -711,7 +748,7 @@ body {
 .content .des {
   font-size: 1.2em;
   color: rgb(108, 63, 26);
-    font-weight: bold;
+  font-weight: bold;
   margin-top: 10px;
   margin-bottom: 20px;
   opacity: 0;
@@ -776,12 +813,33 @@ body {
   margin: 0 5px;
   border: 1px solid #000;
   transition: 0.3s;
-  background-color: #f0960f;
+  background: #f0960f;
 }
 
 .button button:hover {
   background: #fddc0a;
   color: #f0960f;
+}
+
+@media (max-width: 1024px) {
+  .image_container .slide .item {
+    align-items: center;
+    justify-content: center;
+    background-position: center;
+  }
+
+  .item .content {
+    top: 65%;
+    text-align: center;
+  }
+
+  .content .name {
+    font-size: 4em;
+  }
+
+  .content .des {
+    font-size: 1.5em;
+  }
 }
 
 @media (max-width: 768px) {
@@ -805,14 +863,12 @@ body {
     left: calc(100% + 650px);
   }
 
-
   .item .content {
     left: 10%;
     justify-content: center;
     text-align: center;
     top: 20%;
     width: 250px;
-    
   }
 
   .content .name {
@@ -820,10 +876,12 @@ body {
     cursor: pointer;
     transition: all 0.5s;
     background: linear-gradient(
-    to bottom right,
-    rgb(255, 255, 255, 0),
-    #e9b32b);
+      to bottom right,
+      rgb(255, 255, 255, 0),
+      #e9b32b
+    );
     border-radius: 20px;
+    height: 100px;
   }
 
   .content .des {
@@ -839,7 +897,6 @@ body {
     max-height: 300px;
     transition: all 0.5s ease-in-out;
     background: transparent;
-    
   }
 
   .content.content.show-description .name {
@@ -851,7 +908,6 @@ body {
   .button {
     z-index: 10;
   }
-
 }
 
 /* Styles for the restaurant section*/
@@ -898,7 +954,7 @@ body {
 
 .restaurant .top_container .top_left h1 {
   font-size: 4em;
-  color: rgba(65, 170, 33, 0.74);
+  color: rgba(24, 95, 3, 0.74);
   opacity: 0;
   transform: translateY(-20%);
   transition: all 1s ease-in-out;
@@ -910,7 +966,7 @@ body {
   letter-spacing: 1px;
   margin-bottom: 20px;
   opacity: 0.8;
-  color: rgba(65, 170, 33, 0.74);
+  color: rgba(24, 95, 3, 0.74);
   margin-top: 20px;
   opacity: 0;
   transform: translateY(20%);
@@ -921,6 +977,32 @@ body {
   display: grid;
   place-items: center;
   width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .restaurant .top_container .top_left {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .restaurant .top_container {
+    width: 100%;
+    gap: 0px;
+  }
+
+  .restaurant .top_container .top_left {
+    background: transparent;
+    width: 100%;
+  }
+
+  .restaurant .top_container .top_left h1 {
+    font-size: 1.4em;
+  }
+
+  .restaurant .top_container .top_left p {
+    font-size: 0.9em;
+  }
 }
 
 /* Styling for the bottom slider */
