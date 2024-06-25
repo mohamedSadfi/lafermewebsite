@@ -939,7 +939,7 @@ body {
 
 .restaurant .top_container .top_left {
   text-align: center;
-  width: 60%;
+  width: 70%;
   border-radius: 20%;
   background: linear-gradient(
     to top left,
@@ -992,6 +992,7 @@ body {
   }
 
   .restaurant .top_container .top_left {
+    position: relative;
     background: transparent;
     width: 100%;
   }
