@@ -987,6 +987,7 @@ body {
 
 @media (max-width: 768px) {
   .restaurant .top_container {
+    padding-top: 20px;
     width: 100%;
     gap: 0px;
   }
