@@ -92,3 +92,24 @@ function restrictTime() {
 // Initialize the restrictions
 disablePastAndMondayDates();
 restrictTime();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const navbar = document.querySelector(".text-navbar");
+  const navbarItems = document.querySelectorAll(".text-navbar a");
+  const html = document.documentElement;
+
+  menuToggle.addEventListener("click", function () {
+    navbar.classList.toggle("active");
+    menuToggle.classList.toggle("active");
+    html.classList.toggle("no-scroll");
+  });
+
+  navbarItems.forEach((item) => {
+    item.addEventListener("click", function () {
+      navbar.classList.remove("active");
+      menuToggle.classList.remove("active");
+      html.classList.remove("no-scroll");
+    });
+  });
+});

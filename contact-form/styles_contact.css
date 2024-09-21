@@ -12,6 +12,9 @@ body {
   overflow-x: hidden;
 }
 
+.no-scroll {
+  overflow-y: hidden;
+}
 /* Styling for the Navbar */
 
 /* Basic styling for the text-based navigation bar */
@@ -100,6 +103,15 @@ body {
 .text-navbar a:active {
   transform: scale3d(0.8, 0.8, 1); /* Shrink the text on click */
   font-size: 20px; /* Adjust the font size for the click effect */
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 30px;
+  color: #41aa21bd;
+  cursor: pointer;
 }
 
 /* Styling for the Landing Page */
