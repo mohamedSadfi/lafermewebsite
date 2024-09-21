@@ -1,0 +1,515 @@
+@import url("http://use.fontawesome.com/releases/v6.4.2/css/all.css");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Styling for the Navbar */
+
+/* Basic styling for the text-based navigation bar */
+.text-navbar {
+  margin: 0;
+  list-style: none;
+  background-color: transparent; /* Initial background color */
+  position: absolute; /* Fixed position */
+  width: 100%;
+  height: 90px;
+  align-items: center;
+  transition: top 1s; /* Smooth transition effect */
+  z-index: 1001;
+}
+
+.text-navbar ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+}
+
+.text-navbar li {
+  height: 80px;
+  margin: 0 10px;
+  padding: 10px;
+}
+
+.text-navbar a {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  text-decoration: wavy;
+  color: rgba(24, 95, 3, 0.74); /* Initial text color */
+  font-size: 25px;
+  font-weight: normal;
+  transition: color 1s ease-in-out, transform 300ms, font-size 300ms,
+    border-width 300ms;
+  border: 0.2em solid transparent; /* Initial border */
+  &:hover {
+    cursor: pointer;
+    color: #ffc856ff;
+    border-width: 0.2em;
+  }
+  box-sizing: border-box;
+  padding: 0.75em;
+  &::before,
+  &::after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transform-origin: center;
+    transition: border-width 300ms;
+  }
+
+  &::before {
+    border-top: 0.2em solid #659a59ff;
+    border-bottom: 0.2em solid #659a59ff;
+    border-radius: 50%;
+    transform: scale3d(0, 1, 1);
+    transition: all 300ms ease-in-out;
+  }
+
+  &::after {
+    border-left: 0.2em solid#D0E5D8ff;
+    border-right: 0.2em solid #d0e5d8ff;
+    border-radius: 50%;
+    transform: scale3d(1, 0, 1);
+    transition: all 300ms ease-in-out;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    transform: scale3d(1, 1, 1);
+    transition: transform 900ms, border-width 300ms;
+  }
+}
+
+.text-navbar a:active {
+  transform: scale3d(0.8, 0.8, 1); /* Shrink the text on click */
+  font-size: 20px; /* Adjust the font size for the click effect */
+}
+
+/* Styling for the Landing Page */
+
+.landing {
+  position: relative;
+  height: 100vh; /* Set the height to 100% of the viewport height */
+  /* Hide overflow to prevent scrolling */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+.landing img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 1;
+  z-index: -1;
+}
+
+.landing .title_container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  padding: 10px;
+  width: 700px;
+  height: 80%;
+  border-radius: 5%;
+  background: linear-gradient(
+    to bottom right,
+    rgb(255, 255, 255, 0.4),
+    rgb(255, 255, 255, 0.8)
+  );
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow for depth */
+  transition: all 1s ease-in-out;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.landing .title_container h1 {
+  font-size: 4em;
+  color: rgba(65, 170, 33, 0.4);
+  background: linear-gradient(
+    to left,
+    rgba(65, 170, 33, 0.4),
+    rgba(24, 95, 3, 0.74)
+  );
+  -webkit-background-clip: text; /* For Safari */
+  background-clip: text;
+  background-color: transparent;
+  text-align: center;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+/* .landing .title_container .input_text {
+  position: relative;
+  display: flex;
+  background-color: transparent;
+  margin: 10px;
+  text-align: center;
+  width: 300px;
+  height: 30px;
+  font-size: 1.2em;
+  color: rgba(24, 95, 3, 0.74);
+  font-weight: normal;
+  border: 0.2em solid transparent;
+  transition: color 1s ease-in-out, transform 300ms, font-size 300ms,
+    border-width 300ms;
+  
+}  */
+
+.landing .title_container .person-information {
+  display: flex;
+  flex-direction: row;
+}
+
+.landing .title_container .input-container {
+  display: inline-block;
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  padding: 0.75em;
+  box-sizing: border-box;
+  transition: color 1s ease-in-out, transform 300ms, font-size 300ms,
+    border-width 300ms;
+  border: 0.2em solid transparent;
+}
+
+/* .landing .title_container .input-container .input_text {
+  text-align: center;
+  background-color: transparent;
+  border: transparent;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  font-size: 1.2em;
+  border-radius: 15px;
+  width: 400px;
+  height: 40px;
+} */
+
+.input_text,
+.input_date,
+.input_mail,
+.input_meal {
+  border-radius: 2rem;
+  border: none;
+  box-shadow: 10px 6px 0 rgba(65, 170, 33, 0.4);
+  height: 2.8rem;
+  background-color: transparent;
+  font-size: 1rem;
+  margin-left: 10px;
+}
+
+.input_number {
+  border-radius: 2rem;
+  border: none;
+  box-shadow: 10px 6px 0 rgba(65, 170, 33, 0.4);
+  height: 2.8rem;
+  padding: 0.5rem 2rem;
+  background-color: transparent;
+  font-size: 1rem;
+}
+
+.input_text:focus,
+.input_date:focus,
+.input_number:focus,
+.input_mail:focus,
+.input_meal:focus {
+  outline: none;
+  border: 5px solid rgba(65, 170, 33, 0.4);
+  transition: all 0.3s;
+}
+
+.input_text:active,
+.input_date:active,
+.input_number:active,
+.input_mail:active .input_meal:active {
+  border-color: rgba(65, 170, 33, 0.4);
+}
+
+.input_text {
+  width: 200px;
+  padding: 0.5rem 2rem;
+}
+
+.input_mail {
+  width: 350px;
+  padding: 0.5rem 3.5rem;
+}
+
+.input_date {
+  width: 250px;
+  padding: 0.5rem 2rem;
+}
+
+.input_number {
+  width: 100px;
+}
+
+.input_meal {
+  width: 250px;
+  padding: 0.5rem 1rem;
+}
+
+.input-container .label,
+label {
+  margin-right: 10px;
+  margin-left: 10px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: rgba(24, 95, 3, 0.74);
+  text-align: center;
+}
+
+.inlined {
+  margin-top: 25px;
+}
+
+.custom-select::before,
+.custom-select::after {
+  --size: 0.3rem;
+  position: absolute;
+  content: "";
+  right: 2rem;
+  pointer-events: none;
+}
+
+.custom-select::before {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-bottom: var(--size) solid black;
+  top: 60%;
+}
+
+.custom-select::after {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-top: var(--size) solid black;
+  top: 80%;
+}
+
+select {
+  appearance: none;
+  background-color: rgb(101, 154, 89, 0.6);
+}
+
+option {
+  background-color: rgb(101, 154, 89, 0.6);
+}
+
+.custom-button {
+  margin-top: 20px;
+  background-color: transparent;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  text-decoration: wavy;
+  color: rgba(24, 95, 3, 0.74); /* Initial text color */
+  font-size: 25px;
+  font-weight: bold;
+  transition: color 1s ease-in-out, transform 300ms, font-size 300ms,
+    border-width 300ms;
+  border: 0.2em solid transparent; /* Initial border */
+  &:hover {
+    cursor: pointer;
+    color: #ffc856ff;
+    border-width: 0.2em;
+  }
+  box-sizing: border-box;
+  padding: 0.75em;
+  &::before,
+  &::after {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transform-origin: center;
+    transition: border-width 300ms;
+  }
+
+  &::before {
+    border-top: 0.2em solid #659a59ff;
+    border-bottom: 0.2em solid #659a59ff;
+    border-radius: 50%;
+    transform: scale3d(0, 1, 1);
+    transition: all 300ms ease-in-out;
+  }
+
+  &::after {
+    border-left: 0.2em solid#D0E5D8ff;
+    border-right: 0.2em solid #d0e5d8ff;
+    border-radius: 50%;
+    transform: scale3d(1, 0, 1);
+    transition: all 300ms ease-in-out;
+  }
+
+  &:hover::before,
+  &:hover::after {
+    transform: scale3d(1, 1, 1);
+    transition: transform 900ms, border-width 300ms;
+  }
+}
+
+.custom-button:active {
+  transform: scale3d(0.95, 0.95, 1); /* Shrink the text on click */
+  font-size: 20px; /* Adjust the font size for the click effect */
+}
+
+/* Media query for mobile devices */
+
+@media (max-width: 1024px) {
+  .landing .title_container {
+    width: 80%;
+    opacity: 1;
+    height: 700px;
+  }
+
+  .landing .title_container h1 {
+    font-size: 5em;
+    transform: translateY(-10%);
+  }
+}
+
+@media (max-width: 768px) {
+  .landing .title_container {
+    width: 80%;
+    opacity: 1;
+    height: 900px;
+    position: absolute;
+    top: 0;
+  }
+
+  .landing .title_container h1 {
+    font-size: 2.5em;
+    transform: translateY(-10%);
+  }
+
+  .landing .title_container .person-information {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .landing .title_container .inlined {
+    display: flex;
+    flex-direction: column;
+    margin-top: 120px;
+  }
+
+  .input_mail {
+    width: 100%;
+    padding: 0.5rem 1.5rem;
+    transform: translateX(-5%);
+  }
+
+  .input_date {
+    margin-top: 15px;
+    margin-left: 0;
+  }
+
+  .custom-select {
+    margin-top: 140px;
+  }
+
+  .custom-select::before {
+    top: 140%;
+  }
+
+  .custom-select::after {
+    top: 160%;
+  }
+
+  .custom-select label {
+    font-size: 1.15rem;
+    text-align: center;
+  }
+
+  .custom-select select {
+    margin-top: 10px;
+  }
+
+  .custom-button {
+    margin-top: 30px;
+  }
+
+  .inlined label {
+    margin: 15px;
+  }
+
+  .text-navbar {
+    position: fixed; /* Make navbar fixed at the top */
+    height: 60px; /* Adjust navbar height */
+    padding: 0 10px;
+  }
+
+  .text-navbar ul {
+    flex-direction: column; /* Stack items vertically */
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.9
+    ); /* Background color for mobile menu */
+    display: none; /* Hide menu by default */
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 20px;
+  }
+
+  .text-navbar li {
+    margin: 10px 0; /* Adjust margin between items */
+  }
+
+  .text-navbar a {
+    font-size: 20px; /* Adjust font size */
+    padding: 0.5em; /* Adjust padding */
+  }
+
+  .menu-toggle {
+    display: block; /* Show the menu toggle button on mobile */
+    background: transparent; /* Initial background color */
+    border: none; /* No border */
+    padding: 10px; /* Some padding */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition for background color */
+  }
+
+  .text-navbar.active ul {
+    display: flex; /* Show menu when active class is added */
+  }
+
+  .text-navbar.active {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+}
