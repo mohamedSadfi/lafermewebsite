@@ -460,12 +460,15 @@ body {
   color: rgba(65, 170, 33, 0.74);
 }
 
-.location a {
+
+
+.maps {
   color: #e9b32b;
   transition: all 0.2s ease-in-out;
 }
 
-.location a:hover {
+
+.maps:hover {
   color: #fddc0a;
 }
 
@@ -939,7 +942,7 @@ body {
   gap: 20px;
   width: 90%;
   /* Take 50% of the flex container*/
-  height: 25%;
+  height: 29%;
   padding-top: 30px;
 }
 
@@ -994,6 +997,12 @@ body {
     margin-top: 50px;
     padding: 10px;
   }
+
+  .restaurant .top_container .top_left p {
+    font-size: 0.9em;
+  }
+
+
 }
 
 @media (max-width: 768px) {
@@ -1015,7 +1024,7 @@ body {
   }
 
   .restaurant .top_container .top_left p {
-    font-size: 0.9em;
+    font-size: 0.8em;
   }
 }
 
