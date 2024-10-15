@@ -3,6 +3,11 @@ document
   .getElementById("reservationForm")
   .addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent default form submission
+    // Disable the submit button to prevent multiple clicks
+    const submitButton = document.querySelector(
+      "#reservationForm button[type='submit']"
+    );
+    submitButton.disabled = true;
 
     // Collect form data
     const nom = document.getElementById("nom").value;
@@ -31,12 +36,14 @@ document
       .then(
         function (response) {
           alert(
-            "Votre réservation a été envoyée avec succès! Nous vous avons un email de confirmation."
+            "Votre réservation a été envoyée avec succès! Si vous avez donné votre email, nous vous avons un email de confirmation."
           );
           document.getElementById("reservationForm").reset(); // Reset form after submission
+          submitButton.disabled = false; // Re-enable the submit button after success
         },
         function (error) {
           alert("Échec de l'envoi de la réservation.");
+          submitButton.disabled = false; // Re-enable the submit button after failure
         }
       );
   });
@@ -68,10 +75,10 @@ function disablePastAndMondayDates() {
     }
   });
 }
-// Restrict time to be between 09:00 and 18:00, and validate user input
+// Restrict time to be between 09:00 and 17:00, and validate user input
 function restrictTime() {
   const minTime = "09:00";
-  const maxTime = "18:00";
+  const maxTime = "17:00";
 
   // Set min and max in the time input
   timeInput.setAttribute("min", minTime);
@@ -83,7 +90,7 @@ function restrictTime() {
 
     // Check if the selected time is outside the allowed range
     if (selectedTime < minTime || selectedTime > maxTime) {
-      alert(`Nous sommes ouvert entre 09:00 et 18:00.`);
+      alert(`Nous sommes ouvert entre 09:00 et 17:00.`);
       this.value = ""; // Clear the invalid time
     }
   });
