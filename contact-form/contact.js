@@ -20,6 +20,26 @@ document
     const child = document.getElementById("child").value;
     const meal = document.getElementById("meal").value;
 
+    // Validate date: Ensure it's not a Monday
+    const selectedDate = new Date(date);
+    const dayOfWeek = selectedDate.getUTCDay();
+    if (dayOfWeek === 1) {
+      alert(
+        "Nous sommes fermés les lundis. Veuillez sélectionner une autre date."
+      );
+      submitButton.disabled = false;
+      return; // Stop submission
+    }
+
+    // Validate time: Ensure it's within working hours
+    const minTime = "09:00";
+    const maxTime = "17:00";
+    if (heure < minTime || heure > maxTime) {
+      alert("Nous sommes ouverts entre 09:00 et 17:00.");
+      submitButton.disabled = false;
+      return; // Stop submission
+    }
+
     // Send form data via EmailJS
     emailjs
       .send("service_6uk63ke", "template_k221osa", {
@@ -61,19 +81,6 @@ function disablePastAndMondayDates() {
   // Set minimum date to today
   const minDate = `${year}-${month}-${day}`;
   dateInput.setAttribute("min", minDate);
-
-  // Disable Mondays
-  dateInput.addEventListener("input", function () {
-    const selectedDate = new Date(this.value);
-    const dayOfWeek = selectedDate.getUTCDay(); // Get the day of the week (0 is Sunday, 1 is Monday, etc.)
-
-    if (dayOfWeek === 1) {
-      alert(
-        "Nous sommes fermés les lundis. Veuillez sélectionner une autre date."
-      );
-      this.value = ""; // Clear the invalid date
-    }
-  });
 }
 // Restrict time to be between 09:00 and 17:00, and validate user input
 function restrictTime() {
@@ -83,17 +90,6 @@ function restrictTime() {
   // Set min and max in the time input
   timeInput.setAttribute("min", minTime);
   timeInput.setAttribute("max", maxTime);
-
-  // Validate the time input when the user changes it
-  timeInput.addEventListener("input", function () {
-    const selectedTime = this.value;
-
-    // Check if the selected time is outside the allowed range
-    if (selectedTime < minTime || selectedTime > maxTime) {
-      alert(`Nous sommes ouvert entre 09:00 et 17:00.`);
-      this.value = ""; // Clear the invalid time
-    }
-  });
 }
 
 // Initialize the restrictions
