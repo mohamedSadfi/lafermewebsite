@@ -31,6 +31,20 @@ document
       return; // Stop submission
     }
 
+    function isFirstMay2025(dateObj) {
+      return (
+        dateObj.getFullYear() === 2025 &&
+        dateObj.getMonth() === 4 && // Months are zero-indexed: 0 = January, so 4 = May
+        dateObj.getDate() === 1
+      );
+    }
+
+    if (isFirstMay2025(selectedDate)) {
+      alert("Nous sommes malheureusement complet pour cette date");
+      submitButton.disabled = false;
+      return; // Stop submission
+    }
+
     // Validate time: Ensure it's within working hours
     const minTime = "09:00";
     const maxTime = "17:00";
