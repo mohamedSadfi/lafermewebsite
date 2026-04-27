@@ -1,0 +1,35 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+
+<a
+  href="/"
+  class={`group inline-flex items-center gap-2.5 ${className}`}
+  aria-label="La Ferme Tuniso-Suisse — Accueil"
+>
+  <svg
+    aria-hidden="true"
+    width="28"
+    height="28"
+    viewBox="0 0 64 64"
+    class="shrink-0 transition-transform duration-300 group-hover:rotate-12"
+  >
+    <path
+      d="M32 14c-2 6-6 9-12 11 6 0 10 3 12 9 2-6 6-9 12-9-6-2-10-5-12-11Z"
+      fill="currentColor"></path>
+    <path
+      d="M22 38c-2 4-5 6-10 7 4 1 7 4 9 8 1-4 5-6 9-7-4-1-7-3-8-8Z"
+      fill="currentColor"
+      opacity="0.7"></path>
+    <path
+      d="M42 38c1 5 5 7 9 8-4 1-7 4-9 8-1-4-5-6-9-8 4-1 8-3 9-8Z"
+      fill="currentColor"
+      opacity="0.7"></path>
+  </svg>
+  <span class="font-serif text-base sm:text-lg leading-none tracking-tight">
+    La Ferme<span class="hidden sm:inline"> Tuniso-Suisse</span>
+  </span>
+</a>

@@ -3,19 +3,28 @@ import "@fontsource-variable/fraunces";
 import "@fontsource-variable/inter";
 import "~/styles/global.css";
 
+import { SITE } from "~/data/site";
+import Navbar from "~/components/layout/Navbar.astro";
+import Footer from "~/components/layout/Footer.astro";
+import JsonLd from "~/components/layout/JsonLd.astro";
+
 interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
+  /** Hide chrome (navbar/footer) — useful for landing variants. */
+  bare?: boolean;
 }
 
 const {
-  title = "La Ferme Agricole Tuniso-Suisse — Marché, restaurant et événements à Nabeul",
-  description = "Ferme agricole tuniso-suisse à Turki, Nabeul. Marché de produits frais, restaurant traditionnel, et privatisation pour vos événements.",
+  title = `${SITE.name} — ${SITE.tagline}`,
+  description = SITE.description,
   ogImage = "/og-image.jpg",
+  bare = false,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImageAbsolute = new URL(ogImage, Astro.site).toString();
 ---
 
 <!doctype html>
@@ -25,29 +34,34 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#3E5A2C" />
+    <meta name="format-detection" content="telephone=no" />
 
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="restaurant.restaurant" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />
+    <meta property="og:image" content={ogImageAbsolute} />
     <meta property="og:locale" content="fr_FR" />
-    <meta property="og:site_name" content="La Ferme Tuniso-Suisse" />
+    <meta property="og:site_name" content={SITE.shortName} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(ogImage, Astro.site).toString()} />
+    <meta name="twitter:image" content={ogImageAbsolute} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <JsonLd />
   </head>
   <body class="paper-grain bg-bg text-ink antialiased">
-    <div class="relative z-10">
+    {!bare && <Navbar />}
+    <main class="relative z-10">
       <slot />
-    </div>
+    </main>
+    {!bare && <Footer />}
   </body>
 </html>

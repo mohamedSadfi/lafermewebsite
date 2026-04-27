@@ -1,0 +1,96 @@
+---
+import { SITE } from "~/data/site";
+import Logo from "./Logo.astro";
+const year = new Date().getFullYear();
+---
+
+<footer class="relative border-t border-hairline bg-bg text-ink">
+  <div class="container-editorial py-16 md:py-20">
+    <div class="grid gap-12 md:grid-cols-3">
+      <!-- Brand + tagline -->
+      <div class="space-y-4">
+        <div class="text-primary"><Logo /></div>
+        <p class="max-w-xs text-sm leading-relaxed text-ink-soft">
+          Fruits, légumes, miel et eau de rose cultivés sur place.
+          Restaurant traditionnel et privatisation pour vos événements.
+        </p>
+      </div>
+
+      <!-- Visit -->
+      <div class="space-y-4">
+        <h3 class="eyebrow">Nous trouver</h3>
+        <address class="not-italic font-serif text-lg leading-snug text-ink">
+          {SITE.address.street}<br />
+          {SITE.address.region}<br />
+          {SITE.address.postalCode}, {SITE.address.country}
+        </address>
+        <div class="flex flex-col gap-1 text-sm">
+          <a
+            href={`tel:${SITE.contact.phoneTel}`}
+            class="hover:text-primary transition-colors"
+            >{SITE.contact.phone}</a
+          >
+          <a
+            href={`mailto:${SITE.contact.email}`}
+            class="hover:text-primary transition-colors break-all"
+            >{SITE.contact.email}</a
+          >
+        </div>
+      </div>
+
+      <!-- Hours -->
+      <div class="space-y-4">
+        <h3 class="eyebrow">Horaires</h3>
+        <dl class="space-y-2 text-sm">
+          <div class="flex justify-between gap-6">
+            <dt class="text-ink-soft">{SITE.hours.market.label}</dt>
+            <dd class="font-serif">{SITE.hours.market.value}</dd>
+          </div>
+          <div class="flex justify-between gap-6">
+            <dt class="text-ink-soft">{SITE.hours.brunch.label}</dt>
+            <dd class="font-serif">{SITE.hours.brunch.value}</dd>
+          </div>
+          <div class="flex justify-between gap-6">
+            <dt class="text-ink-soft">{SITE.hours.lunch.label}</dt>
+            <dd class="font-serif">{SITE.hours.lunch.value}</dd>
+          </div>
+        </dl>
+        <p class="text-xs italic text-ink-soft">{SITE.hours.closed}</p>
+      </div>
+    </div>
+
+    <div
+      class="mt-14 flex flex-col-reverse items-start gap-6 border-t border-hairline pt-8 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p class="text-xs text-ink-soft">
+        © {year} {SITE.shortName}. Tous droits réservés.
+      </p>
+
+      <div class="flex items-center gap-3">
+        <a
+          href={SITE.social.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Facebook"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-hairline text-ink-soft transition-colors hover:border-primary hover:text-primary"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.2-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.2 0-3.8 1.4-3.8 3.9v2.2H8v3h2.5V21h3z"/>
+          </svg>
+        </a>
+        <a
+          href={SITE.social.googleMaps}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Google Maps"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-hairline text-ink-soft transition-colors hover:border-primary hover:text-primary"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
