@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.lafermetunisosuisse.com/sitemap-index.xml
