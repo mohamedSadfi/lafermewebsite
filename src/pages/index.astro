@@ -1,48 +1,40 @@
 ---
 import Base from "~/layouts/Base.astro";
+import Hero from "~/components/sections/Hero.astro";
+import Story from "~/components/sections/Story.astro";
+import Restaurant from "~/components/sections/Restaurant.astro";
+import Events from "~/components/sections/Events.astro";
+import Visit from "~/components/sections/Visit.astro";
 import SectionLabel from "~/components/ui/SectionLabel.astro";
 ---
 
 <Base>
-  <!-- Placeholder hero so the navbar has something dark to overlay -->
+  <Hero />
+  <Story />
+
+  <!-- Market — built in Phase 5 -->
   <section
-    class="relative flex min-h-screen items-center justify-center bg-primary text-bg"
+    id="marche"
+    class="relative border-t border-hairline scroll-mt-20"
   >
-    <div class="container-editorial text-center">
-      <h1 class="font-serif text-5xl sm:text-7xl tracking-tight">
-        La ferme tuniso-suisse
-      </h1>
-      <p class="mt-4 font-serif italic text-bg/80">Sections en cours de construction…</p>
+    <div class="container-editorial py-24 md:py-32">
+      <SectionLabel number="02" label="Le marché" />
+      <h2 class="mt-6 font-serif text-4xl sm:text-5xl">Marché — bientôt</h2>
     </div>
   </section>
 
-  <section id="histoire" class="container-editorial py-24 md:py-32">
-    <SectionLabel number="01" label="Notre histoire" />
-    <h2 class="mt-6 font-serif text-4xl sm:text-5xl">Histoire — bientôt</h2>
-  </section>
+  <Restaurant />
+  <Events />
+  <Visit />
 
-  <section id="marche" class="container-editorial py-24 md:py-32 border-t border-hairline">
-    <SectionLabel number="02" label="Le marché" />
-    <h2 class="mt-6 font-serif text-4xl sm:text-5xl">Marché — bientôt</h2>
-  </section>
-
-  <section id="restaurant" class="container-editorial py-24 md:py-32 border-t border-hairline">
-    <SectionLabel number="03" label="À table" />
-    <h2 class="mt-6 font-serif text-4xl sm:text-5xl">Restaurant — bientôt</h2>
-  </section>
-
-  <section id="evenements" class="container-editorial py-24 md:py-32 border-t border-hairline">
-    <SectionLabel number="04" label="Événements" />
-    <h2 class="mt-6 font-serif text-4xl sm:text-5xl">Événements — bientôt</h2>
-  </section>
-
-  <section id="visiter" class="container-editorial py-24 md:py-32 border-t border-hairline">
-    <SectionLabel number="05" label="Nous trouver" />
-    <h2 class="mt-6 font-serif text-4xl sm:text-5xl">Visite — bientôt</h2>
-  </section>
-
-  <section id="reserver" class="container-editorial py-24 md:py-32 border-t border-hairline">
-    <SectionLabel number="06" label="Réserver" />
-    <h2 class="mt-6 font-serif text-4xl sm:text-5xl">Réservation — bientôt</h2>
+  <!-- Reservation — built in Phase 6 -->
+  <section
+    id="reserver"
+    class="relative border-t border-hairline scroll-mt-20"
+  >
+    <div class="container-editorial py-24 md:py-32">
+      <SectionLabel number="06" label="Réserver" />
+      <h2 class="mt-6 font-serif text-4xl sm:text-5xl">Réservation — bientôt</h2>
+    </div>
   </section>
 </Base>

@@ -1,0 +1,69 @@
+---
+import { Image } from "astro:assets";
+import storyImage from "~/assets/extra/farm-1.jpg";
+import SectionLabel from "~/components/ui/SectionLabel.astro";
+import StatRow from "~/components/ui/StatRow.astro";
+
+const stats = [
+  { value: "Mardi → Dimanche", label: "Ouvert" },
+  { value: "12 produits", label: "Cultivés sur place" },
+  { value: "Nabeul, TN", label: "À 30 min de Tunis" },
+];
+---
+
+<section id="histoire" class="relative scroll-mt-20">
+  <div class="container-editorial py-24 md:py-32">
+    <div class="grid gap-12 md:grid-cols-12 md:gap-16">
+      <!-- Text column -->
+      <div class="md:col-span-7 md:pr-8">
+        <SectionLabel number="01" label="Notre histoire" />
+
+        <h2
+          class="mt-8 font-serif text-4xl leading-[1.1] sm:text-5xl md:text-6xl"
+        >
+          Une ferme à mi-chemin entre la Tunisie et la Suisse.
+        </h2>
+
+        <div class="mt-8 space-y-5 text-lg leading-relaxed text-ink-soft">
+          <p>
+            Sur les terres de Turki, à deux pas de la sortie de l'autoroute
+            A1 Hammamet–Tunis, notre production se concentre sur les fruits
+            et légumes de saison, le miel de nos abeilles et l'eau de rose
+            distillée chaque printemps.
+          </p>
+          <p>
+            Tout ce que vous trouvez sur le marché ou dans l'assiette est
+            cultivé, élevé ou préparé ici — sans intermédiaire, au rythme
+            des saisons et du soleil de Nabeul.
+          </p>
+        </div>
+
+        <p class="mt-10 font-serif text-xl italic text-primary">
+          « Du champ à la table, sans détour. »
+        </p>
+      </div>
+
+      <!-- Image column with terracotta offset frame -->
+      <div class="md:col-span-5">
+        <div class="relative aspect-[4/5] w-full">
+          <span
+            aria-hidden="true"
+            class="absolute -bottom-3 -right-3 z-0 block h-full w-full rounded-sm border border-accent/70"
+          ></span>
+          <Image
+            src={storyImage}
+            alt="Vue de la ferme et de ses cultures"
+            widths={[480, 800, 1100]}
+            sizes="(min-width: 768px) 40vw, 90vw"
+            quality={82}
+            class="relative z-10 h-full w-full rounded-sm object-cover"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-20 md:mt-28">
+      <StatRow stats={stats} />
+    </div>
+  </div>
+</section>

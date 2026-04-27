@@ -1,0 +1,105 @@
+---
+import SectionLabel from "~/components/ui/SectionLabel.astro";
+import { SITE } from "~/data/site";
+
+// Use a clean Google Maps embed URL based on coordinates — no API key needed.
+const mapEmbed = `https://maps.google.com/maps?q=${SITE.geo.latitude},${SITE.geo.longitude}&z=15&output=embed`;
+---
+
+<section
+  id="visiter"
+  class="relative border-t border-hairline scroll-mt-20"
+>
+  <div class="container-editorial py-24 md:py-32">
+    <div class="max-w-3xl">
+      <SectionLabel number="05" label="Nous trouver" />
+      <h2 class="mt-8 font-serif text-4xl leading-[1.1] sm:text-5xl md:text-6xl">
+        À deux minutes de la sortie Turki sur l'autoroute A1.
+      </h2>
+    </div>
+
+    <div class="mt-16 grid gap-10 md:grid-cols-12 md:gap-12">
+      <!-- Map -->
+      <div class="md:col-span-7">
+        <div
+          class="relative aspect-[4/3] w-full overflow-hidden rounded-sm border border-hairline"
+        >
+          <iframe
+            src={mapEmbed}
+            title="Carte de localisation de La Ferme Tuniso-Suisse"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            class="absolute inset-0 h-full w-full"
+            style="border: 0;"></iframe>
+        </div>
+        <a
+          href={SITE.social.googleMaps}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mt-4 inline-flex items-center gap-2 text-sm text-primary hover:text-primary-soft underline underline-offset-4"
+        >
+          Ouvrir dans Google Maps
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M7 17L17 7M9 7h8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Contact + hours -->
+      <div class="md:col-span-5 space-y-10">
+        <div>
+          <h3 class="eyebrow">Adresse</h3>
+          <address class="mt-3 not-italic font-serif text-2xl leading-snug">
+            {SITE.address.street}<br />
+            {SITE.address.region}<br />
+            {SITE.address.postalCode} · {SITE.address.country}
+          </address>
+          <p class="mt-3 max-w-xs text-sm italic text-ink-soft">
+            {SITE.address.directions}.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="eyebrow">Contact</h3>
+          <ul class="mt-3 space-y-2 text-base">
+            <li>
+              <a
+                href={`tel:${SITE.contact.phoneTel}`}
+                class="font-serif text-xl hover:text-primary transition-colors"
+              >
+                {SITE.contact.phone}
+              </a>
+            </li>
+            <li>
+              <a
+                href={`mailto:${SITE.contact.email}`}
+                class="font-serif text-xl hover:text-primary transition-colors break-all"
+              >
+                {SITE.contact.email}
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="eyebrow">Horaires</h3>
+          <dl class="mt-3 space-y-2 text-base">
+            <div class="flex items-baseline justify-between gap-6 border-t border-hairline pt-2">
+              <dt class="text-ink-soft">{SITE.hours.market.label}</dt>
+              <dd class="font-serif">{SITE.hours.market.value}</dd>
+            </div>
+            <div class="flex items-baseline justify-between gap-6 border-t border-hairline pt-2">
+              <dt class="text-ink-soft">{SITE.hours.brunch.label}</dt>
+              <dd class="font-serif">{SITE.hours.brunch.value}</dd>
+            </div>
+            <div class="flex items-baseline justify-between gap-6 border-t border-hairline pt-2">
+              <dt class="text-ink-soft">{SITE.hours.lunch.label}</dt>
+              <dd class="font-serif">{SITE.hours.lunch.value}</dd>
+            </div>
+          </dl>
+          <p class="mt-3 text-sm italic text-accent">{SITE.hours.closed}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

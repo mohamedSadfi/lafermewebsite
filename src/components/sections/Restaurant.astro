@@ -1,0 +1,115 @@
+---
+import { Image } from "astro:assets";
+import r1 from "~/assets/restaurant/restaurant-1.jpg";
+import r2 from "~/assets/restaurant/restaurant-2.jpg";
+import r3 from "~/assets/restaurant/restaurant-3.jpg";
+import r4 from "~/assets/restaurant/restaurant-4.jpg";
+import SectionLabel from "~/components/ui/SectionLabel.astro";
+import { SITE } from "~/data/site";
+
+const services = [
+  {
+    name: "Brunch",
+    hours: SITE.hours.brunch.value,
+    description:
+      "Un brunch équilibré, généreux : œufs de la ferme, pain frais, miel maison, fromages, fruits de saison et jus pressés.",
+  },
+  {
+    name: "Déjeuner",
+    hours: SITE.hours.lunch.value,
+    description:
+      "Cuisine traditionnelle tunisienne au gré des arrivages — grillades de viandes, légumes du jardin, plats du jour selon la saison.",
+  },
+];
+---
+
+<section
+  id="restaurant"
+  class="relative border-t border-hairline scroll-mt-20"
+>
+  <div class="container-editorial py-24 md:py-32">
+    <div class="grid gap-14 md:grid-cols-12 md:gap-16">
+      <!-- Gallery column (mosaic) -->
+      <div class="md:col-span-7">
+        <div class="grid grid-cols-2 gap-3 md:gap-4">
+          <div class="aspect-[3/4] overflow-hidden rounded-sm">
+            <Image
+              src={r1}
+              alt="Vue de la salle du restaurant"
+              widths={[400, 700]}
+              sizes="(min-width: 768px) 30vw, 45vw"
+              quality={80}
+              class="h-full w-full object-cover"
+            />
+          </div>
+          <div class="aspect-[3/4] overflow-hidden rounded-sm mt-10">
+            <Image
+              src={r2}
+              alt="Plat traditionnel servi au restaurant"
+              widths={[400, 700]}
+              sizes="(min-width: 768px) 30vw, 45vw"
+              quality={80}
+              class="h-full w-full object-cover"
+            />
+          </div>
+          <div class="aspect-[3/4] overflow-hidden rounded-sm">
+            <Image
+              src={r3}
+              alt="Détail d'une table dressée"
+              widths={[400, 700]}
+              sizes="(min-width: 768px) 30vw, 45vw"
+              quality={80}
+              class="h-full w-full object-cover"
+            />
+          </div>
+          <div class="aspect-[3/4] overflow-hidden rounded-sm mt-10">
+            <Image
+              src={r4}
+              alt="Ambiance verdoyante du restaurant"
+              widths={[400, 700]}
+              sizes="(min-width: 768px) 30vw, 45vw"
+              quality={80}
+              class="h-full w-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Copy column -->
+      <div class="md:col-span-5 md:pt-6">
+        <SectionLabel number="03" label="À table" />
+        <h2 class="mt-8 font-serif text-4xl leading-[1.1] sm:text-5xl">
+          Un déjeuner aux saveurs du jardin.
+        </h2>
+        <p class="mt-6 text-lg leading-relaxed text-ink-soft">
+          Notre cuisine met en valeur les produits cueillis le matin même —
+          rien ne sort d'une boîte. Brunch équilibré, déjeuner traditionnel
+          tunisien et grillades, selon les arrivages et la saison.
+        </p>
+
+        <ul class="mt-10 space-y-8">
+          {
+            services.map((s) => (
+              <li class="border-t border-hairline pt-6">
+                <div class="flex items-baseline justify-between gap-4">
+                  <h3 class="font-serif text-2xl">{s.name}</h3>
+                  <span class="eyebrow text-leaf">{s.hours}</span>
+                </div>
+                <p class="mt-3 text-base text-ink-soft">{s.description}</p>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div class="mt-10">
+          <a
+            href="#reserver"
+            class="inline-flex items-center justify-center rounded-full bg-primary px-7 py-3.5 text-sm uppercase tracking-wider text-bg transition-colors hover:bg-primary-soft"
+          >
+            Réserver une table
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
