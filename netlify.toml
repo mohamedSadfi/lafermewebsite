@@ -1,8 +1,0 @@
-[build]
-  command = "npm run build"
-
-[build.environment]
-  NODE_VERSION = "20"
-
-# Server-rendered routes (e.g. /api/reservation) are auto-wired
-# as Netlify Functions by @astrojs/netlify. No extra config needed.

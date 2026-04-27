@@ -2,13 +2,15 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
-import netlify from "@astrojs/netlify";
+import vercel from "@astrojs/vercel";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://www.lafermetunisosuisse.com",
   output: "static",
-  adapter: netlify(),
+  adapter: vercel({
+    webAnalytics: { enabled: false },
+  }),
   integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
