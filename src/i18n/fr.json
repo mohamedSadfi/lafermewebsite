@@ -1,0 +1,34 @@
+{
+  "site": {
+    "name": "La Ferme Agricole Tuniso-Suisse",
+    "shortName": "La Ferme Tuniso-Suisse",
+    "tagline": "Marché, restaurant et événements"
+  },
+  "nav": {
+    "histoire": "Histoire",
+    "marche": "Marché",
+    "restaurant": "Restaurant",
+    "evenements": "Événements",
+    "visiter": "Nous trouver",
+    "reserver": "Réserver"
+  },
+  "cta": {
+    "reserveTable": "Réserver une table",
+    "discoverMarket": "Découvrir le marché",
+    "contactByPhone": "Nous appeler",
+    "contactByEmail": "Demande par e-mail"
+  },
+  "hours": {
+    "openDays": "Mardi – Dimanche",
+    "closedDay": "Fermé le lundi"
+  },
+  "form": {
+    "submit": "Envoyer ma demande",
+    "submitting": "Envoi…",
+    "successTitle": "Demande bien reçue.",
+    "successBody": "Merci ! Nous vous confirmons votre réservation par téléphone ou par e-mail.",
+    "errorGeneric": "Une erreur est survenue. Merci de nous appeler ou de réessayer plus tard.",
+    "errorConnection": "Connexion impossible. Merci de réessayer dans un instant.",
+    "errorValidation": "Merci de corriger les champs en rouge."
+  }
+}
