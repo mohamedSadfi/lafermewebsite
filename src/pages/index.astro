@@ -2,6 +2,7 @@
 import Base from "~/layouts/Base.astro";
 import Hero from "~/components/sections/Hero.astro";
 import Story from "~/components/sections/Story.astro";
+import Market from "~/components/sections/Market.astro";
 import Restaurant from "~/components/sections/Restaurant.astro";
 import Events from "~/components/sections/Events.astro";
 import Visit from "~/components/sections/Visit.astro";
@@ -12,16 +13,7 @@ import SectionLabel from "~/components/ui/SectionLabel.astro";
   <Hero />
   <Story />
 
-  <!-- Market — built in Phase 5 -->
-  <section
-    id="marche"
-    class="relative border-t border-hairline scroll-mt-20"
-  >
-    <div class="container-editorial py-24 md:py-32">
-      <SectionLabel number="02" label="Le marché" />
-      <h2 class="mt-6 font-serif text-4xl sm:text-5xl">Marché — bientôt</h2>
-    </div>
-  </section>
+  <Market />
 
   <Restaurant />
   <Events />

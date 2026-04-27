@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import SectionLabel from "~/components/ui/SectionLabel.astro";
+
+const products = (await getCollection("products")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const seasonStyles: Record<string, string> = {
+  "Toute l'année": "text-leaf border-leaf/40",
+  Printemps: "text-accent border-accent/40",
+  Été: "text-accent border-accent/40",
+  Automne: "text-primary border-primary/40",
+  Hiver: "text-primary border-primary/40",
+};
+---
+
+<section
+  id="marche"
+  class="relative border-t border-hairline scroll-mt-20"
+>
+  <div class="container-editorial py-24 md:py-32">
+    <div class="grid gap-10 md:grid-cols-12 md:gap-16">
+      <div class="md:col-span-5">
+        <SectionLabel number="02" label="Le marché" />
+        <h2
+          class="mt-8 font-serif text-4xl leading-[1.1] sm:text-5xl md:text-6xl"
+        >
+          Au rythme des saisons.
+        </h2>
+      </div>
+      <div class="md:col-span-7 md:pt-6">
+        <p class="text-lg leading-relaxed text-ink-soft">
+          Du verger au panier, sans intermédiaire. Chaque variété est cultivée
+          ou récoltée sur la ferme — agrumes en hiver, pêches et tomates au cœur
+          de l'été, miel et eau de rose toute l'année.
+        </p>
+      </div>
+    </div>
+
+    <ul
+      role="list"
+      class="mt-16 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 lg:grid-cols-3"
+    >
+      {
+        products.map((p) => (
+          <li class="group">
+            <div class="relative aspect-[4/5] overflow-hidden rounded-sm bg-hairline">
+              <Image
+                src={p.data.image}
+                alt={p.data.title}
+                widths={[320, 480, 720]}
+                sizes="(min-width: 1024px) 22rem, (min-width: 640px) 45vw, 90vw"
+                quality={80}
+                loading="lazy"
+                class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              />
+              <span
+                class={`absolute left-3 top-3 inline-flex items-center rounded-full border bg-bg/85 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-[0.16em] backdrop-blur ${seasonStyles[p.data.season] ?? "text-ink border-hairline"}`}
+              >
+                {p.data.season}
+              </span>
+            </div>
+            <div class="mt-5">
+              <h3 class="font-serif text-2xl leading-tight text-ink">
+                {p.data.title}
+              </h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-soft">
+                {p.data.description}
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-16 max-w-xl text-sm italic text-ink-soft">
+      Selon les arrivages et la saison. Pour les commandes en gros (hôtels,
+      restaurants), contactez-nous directement.
+    </p>
+  </div>
+</section>
