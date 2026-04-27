@@ -1,0 +1,34 @@
+---
+import SectionLabel from "~/components/ui/SectionLabel.astro";
+import ReservationForm from "~/components/islands/ReservationForm";
+---
+
+<section
+  id="reserver"
+  class="relative border-t border-hairline scroll-mt-20 bg-bg"
+>
+  <div class="container-editorial py-24 md:py-32">
+    <div class="grid gap-12 md:grid-cols-12 md:gap-16">
+      <div class="md:col-span-5 md:sticky md:top-28 md:self-start">
+        <SectionLabel number="06" label="Réserver" />
+        <h2
+          class="mt-8 font-serif text-4xl leading-[1.1] sm:text-5xl md:text-6xl"
+        >
+          Réserver<br />
+          <span class="italic font-light">votre table.</span>
+        </h2>
+        <p class="mt-6 max-w-md text-lg leading-relaxed text-ink-soft">
+          Brunch ou déjeuner, en famille ou entre amis. Indiquez-nous
+          l'essentiel — nous revenons vers vous très vite pour confirmer.
+        </p>
+        <p class="mt-8 text-sm italic text-accent">
+          Nous sommes fermés le lundi.
+        </p>
+      </div>
+
+      <div class="md:col-span-7">
+        <ReservationForm client:visible />
+      </div>
+    </div>
+  </div>
+</section>

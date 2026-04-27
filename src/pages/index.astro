@@ -6,7 +6,7 @@ import Market from "~/components/sections/Market.astro";
 import Restaurant from "~/components/sections/Restaurant.astro";
 import Events from "~/components/sections/Events.astro";
 import Visit from "~/components/sections/Visit.astro";
-import SectionLabel from "~/components/ui/SectionLabel.astro";
+import Reservation from "~/components/sections/Reservation.astro";
 ---
 
 <Base>
@@ -18,15 +18,5 @@ import SectionLabel from "~/components/ui/SectionLabel.astro";
   <Restaurant />
   <Events />
   <Visit />
-
-  <!-- Reservation — built in Phase 6 -->
-  <section
-    id="reserver"
-    class="relative border-t border-hairline scroll-mt-20"
-  >
-    <div class="container-editorial py-24 md:py-32">
-      <SectionLabel number="06" label="Réserver" />
-      <h2 class="mt-6 font-serif text-4xl sm:text-5xl">Réservation — bientôt</h2>
-    </div>
-  </section>
+  <Reservation />
 </Base>
