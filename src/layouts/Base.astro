@@ -1,15 +1,21 @@
 ---
+import "@fontsource-variable/fraunces";
+import "@fontsource-variable/inter";
 import "~/styles/global.css";
 
 interface Props {
   title?: string;
   description?: string;
+  ogImage?: string;
 }
 
 const {
-  title = "La Ferme Agricole Tuniso-Suisse",
-  description = "Marché, restaurant et événements à la ferme tuniso-suisse à Turki, Nabeul.",
+  title = "La Ferme Agricole Tuniso-Suisse — Marché, restaurant et événements à Nabeul",
+  description = "Ferme agricole tuniso-suisse à Turki, Nabeul. Marché de produits frais, restaurant traditionnel, et privatisation pour vos événements.",
+  ogImage = "/og-image.jpg",
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 ---
 
 <!doctype html>
@@ -18,10 +24,30 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#3E5A2C" />
+
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site).toString()} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="La Ferme Tuniso-Suisse" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, Astro.site).toString()} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body>
-    <slot />
+  <body class="paper-grain bg-bg text-ink antialiased">
+    <div class="relative z-10">
+      <slot />
+    </div>
   </body>
 </html>
