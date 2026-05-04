@@ -4,8 +4,12 @@ Site officiel de la **Ferme Agricole Tuniso-Suisse**, à Turki (Nabeul).
 Marché, restaurant et privatisation pour événements.
 
 Construit avec **[Astro](https://astro.build) 5** (basé sur Vite),
-**React** (uniquement pour le formulaire de réservation), **Tailwind v4**
+**React** (uniquement pour le formulaire de demande), **Tailwind v4**
 et **Mailgun** pour la livraison des emails. Déployé sur **Vercel**.
+
+Les **réservations de table** se font directement par téléphone.
+Le **formulaire** sur le site est dédié aux demandes plus larges :
+événements privés, grands groupes, commandes en gros, etc.
 
 ---
 
@@ -29,9 +33,9 @@ npm run check    # vérifie les types TypeScript
 
 Tout est centralisé dans **[src/data/site.ts](src/data/site.ts)** :
 téléphone, email, adresse, coordonnées GPS, horaires, liens Facebook
-et Google Maps. Modifier ce fichier met à jour automatiquement
-le pied de page, la section "Nous trouver", le JSON-LD SEO et le
-formulaire de réservation.
+et Google Maps. Modifier ce fichier met à jour automatiquement le
+pied de page, la section "Nous trouver", la section "Réserver" (le
+numéro affiché en grand) et le JSON-LD SEO.
 
 ### Catalogue du marché
 
@@ -53,17 +57,6 @@ Pour ajouter un produit : créer un nouveau `.md`, déposer la photo
 dans `src/assets/market/` et remplir les champs ci-dessus.
 Pour retirer un produit : supprimer son fichier `.md`.
 
-### Jours de fermeture / réservations bloquées
-
-**[src/config/closures.ts](src/config/closures.ts)** contient :
-
-- `CLOSED_WEEKDAYS` : jours de la semaine fermés (lundi par défaut).
-- `CLOSED_DATES` : dates ponctuelles bloquées au format `YYYY-MM-DD`
-  (jours fériés, complets, congés…).
-
-Ces blocages sont vérifiés côté navigateur **et** côté serveur :
-même un script malveillant ne peut pas réserver un jour fermé.
-
 ### Photos
 
 - Hero / page d'accueil : [src/assets/hero/landing.jpg](src/assets/hero/landing.jpg)
@@ -79,7 +72,7 @@ le fichier directement et le builder s'occupe du reste.
 
 ## Configuration Mailgun
 
-Le formulaire de réservation envoie un email via [Mailgun](https://www.mailgun.com/).
+Le formulaire de demande envoie un email via [Mailgun](https://www.mailgun.com/).
 Variables d'environnement nécessaires (à renseigner dans le tableau
 de bord Vercel, **jamais en clair dans le repo**) :
 
@@ -89,7 +82,7 @@ de bord Vercel, **jamais en clair dans le repo**) :
 | `MAILGUN_DOMAIN` | Domaine d'envoi vérifié (ex. `mg.lafermetunisosuisse.com`) |
 | `MAILGUN_REGION` | `us` ou `eu` selon votre compte |
 | `MAILGUN_FROM` | Adresse expéditrice (ex. `"La Ferme <no-reply@mg…>"`) |
-| `MAILGUN_TO` | Boîte destinataire des réservations (`infos@…`) |
+| `MAILGUN_TO` | Boîte destinataire des demandes (`infos@…`) |
 
 Pour le développement local, copier `.env.example` vers `.env` :
 
@@ -134,7 +127,7 @@ attendu.
 
 - Chaque push sur `v2-astro` génère un *Preview Deployment*. Chaque
   push sur `main` met à jour la *Production*.
-- L'endpoint `/api/reservation` devient une **Vercel Function** —
+- L'endpoint `/api/inquiry` devient une **Vercel Function** —
   visible dans *Project → Logs* avec ses traces (utile pour
   diagnostiquer un envoi Mailgun raté).
 - Pour tester localement avec les variables de production, installer
@@ -150,13 +143,12 @@ src/
 │   ├── hero/, market/, restaurant/, extra/, brand/
 ├── components/
 │   ├── layout/              # Navbar, Footer, Logo, JsonLd
-│   ├── sections/            # Hero, Story, Market, Restaurant, Events, Visit, Reservation
+│   ├── sections/            # Hero, Story, Market, Restaurant, Events,
+│   │                        #   Visit, Reservation (CTA tel.), Inquiry (form)
 │   ├── ui/                  # primitives : Button, SectionLabel, Hairline, StatRow
-│   └── islands/             # composants React (formulaire de réservation)
+│   └── islands/             # composants React (formulaire de demande)
 ├── content/
 │   └── products/*.md        # catalogue marché — un fichier par produit
-├── config/
-│   └── closures.ts          # jours fermés, dates bloquées
 ├── data/
 │   └── site.ts              # contact, horaires, adresse, géo
 ├── i18n/
@@ -165,13 +157,13 @@ src/
 ├── layouts/
 │   └── Base.astro           # squelette HTML, SEO, polices
 ├── lib/
-│   ├── reservation-schema.ts # schéma Zod partagé client/serveur
-│   └── mailgun.ts            # client Mailgun (server-only)
+│   ├── inquiry-schema.ts    # schéma Zod du formulaire de demande
+│   └── mailgun.ts           # client Mailgun (server-only)
 ├── pages/
-│   ├── index.astro           # page d'accueil (compose les sections)
-│   └── api/reservation.ts    # endpoint POST → Mailgun
+│   ├── index.astro          # page d'accueil (compose les sections)
+│   └── api/inquiry.ts       # endpoint POST → Mailgun
 └── styles/
-    └── global.css            # tokens @theme, typographie de base
+    └── global.css           # tokens @theme, typographie de base
 ```
 
 ---

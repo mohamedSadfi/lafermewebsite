@@ -1,13 +1,14 @@
-import { useId, useMemo, useState } from "react";
+import { useId, useState } from "react";
 import {
-  reservationSchema,
-  type ReservationInput,
-} from "~/lib/reservation-schema";
-import { isClosed } from "~/config/closures";
+  inquirySchema,
+  inquiryTypes,
+  INQUIRY_LABELS,
+  type InquiryInput,
+  type InquiryType,
+} from "~/lib/inquiry-schema";
 
 type Status = "idle" | "submitting" | "success" | "error";
-
-type FieldErrors = Partial<Record<keyof ReservationInput, string>>;
+type FieldErrors = Partial<Record<keyof InquiryInput, string>>;
 
 const today = () => new Date().toISOString().slice(0, 10);
 
@@ -51,24 +52,12 @@ const inputClass = (hasError: boolean) =>
     hasError ? "border-accent" : "border-ink/20"
   } px-0 py-2 text-base text-ink placeholder:text-ink-soft/50 focus:border-primary focus:outline-none focus:ring-0 transition-colors`;
 
-export default function ReservationForm() {
+export default function InquiryForm() {
   const id = useId();
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<FieldErrors>({});
   const [topError, setTopError] = useState<string>("");
-  const [mealType, setMealType] = useState<ReservationInput["mealType"]>(
-    "dejeuner",
-  );
-
-  const minDate = useMemo(() => today(), []);
-
-  const timeRange = useMemo(
-    () =>
-      mealType === "brunch"
-        ? { min: "08:00", max: "12:00", placeholder: "10:00" }
-        : { min: "12:00", max: "17:00", placeholder: "13:00" },
-    [mealType],
-  );
+  const [inquiryType, setInquiryType] = useState<InquiryType>("evenement");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -83,21 +72,19 @@ export default function ReservationForm() {
       prenom: String(fd.get("prenom") ?? ""),
       telephone: String(fd.get("telephone") ?? ""),
       email: String(fd.get("email") ?? ""),
-      date: String(fd.get("date") ?? ""),
-      time: String(fd.get("time") ?? ""),
-      adultes: fd.get("adultes"),
-      enfants: fd.get("enfants") ?? 0,
-      mealType: String(fd.get("mealType") ?? ""),
-      note: String(fd.get("note") ?? ""),
+      inquiryType: String(fd.get("inquiryType") ?? ""),
+      preferredDate: String(fd.get("preferredDate") ?? ""),
+      guestCount: String(fd.get("guestCount") ?? ""),
+      message: String(fd.get("message") ?? ""),
       website: String(fd.get("website") ?? ""),
     };
 
-    const parsed = reservationSchema.safeParse(candidate);
+    const parsed = inquirySchema.safeParse(candidate);
     if (!parsed.success) {
       const fieldErrors = parsed.error.flatten().fieldErrors;
       const flat: FieldErrors = {};
       for (const [k, v] of Object.entries(fieldErrors)) {
-        if (v && v[0]) flat[k as keyof ReservationInput] = v[0];
+        if (v && v[0]) flat[k as keyof InquiryInput] = v[0];
       }
       setErrors(flat);
       setTopError("Merci de corriger les champs en rouge.");
@@ -105,18 +92,9 @@ export default function ReservationForm() {
       return;
     }
 
-    // Client-side closure check (server re-checks too)
-    const closure = isClosed(parsed.data.date);
-    if (closure.closed) {
-      setErrors({ date: closure.reason });
-      setTopError(closure.reason ?? "Date non disponible.");
-      setStatus("error");
-      return;
-    }
-
     setStatus("submitting");
     try {
-      const res = await fetch("/api/reservation", {
+      const res = await fetch("/api/inquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(parsed.data),
@@ -125,10 +103,7 @@ export default function ReservationForm() {
       const json = await res.json().catch(() => ({}));
 
       if (!res.ok || !json.ok) {
-        if (json.error === "closed") {
-          setErrors({ date: json.reason });
-          setTopError(json.reason ?? "Date non disponible.");
-        } else if (json.error === "validation") {
+        if (json.error === "validation") {
           setTopError("Données invalides — merci de vérifier.");
         } else {
           setTopError(
@@ -171,8 +146,8 @@ export default function ReservationForm() {
           </h3>
         </div>
         <p className="mt-4 text-base leading-relaxed text-ink-soft">
-          Merci ! Nous vous confirmons votre réservation par téléphone ou
-          par e-mail. Pour toute urgence, vous pouvez nous joindre
+          Merci ! Nous revenons vers vous très rapidement par téléphone
+          ou par e-mail. Pour toute urgence, vous pouvez nous joindre
           directement au{" "}
           <a className="text-primary underline" href="tel:+21629643008">
             +216 29 643 008
@@ -184,6 +159,8 @@ export default function ReservationForm() {
   }
 
   const submitting = status === "submitting";
+  const showDateAndCount =
+    inquiryType === "evenement" || inquiryType === "grand-groupe";
 
   return (
     <form
@@ -202,9 +179,47 @@ export default function ReservationForm() {
       ) : null}
 
       <fieldset className="space-y-6" disabled={submitting}>
+        <legend className="eyebrow mb-2">Type de demande</legend>
+        <div className="flex flex-wrap gap-3">
+          {inquiryTypes.map((value) => {
+            const checked = inquiryType === value;
+            return (
+              <label
+                key={value}
+                htmlFor={`${id}-type-${value}`}
+                className={`relative cursor-pointer rounded-full border px-5 py-2.5 font-serif text-base leading-none transition-colors ${
+                  checked
+                    ? "border-primary bg-primary text-bg"
+                    : "border-ink/20 text-ink hover:border-ink/40"
+                }`}
+              >
+                <input
+                  id={`${id}-type-${value}`}
+                  type="radio"
+                  name="inquiryType"
+                  value={value}
+                  checked={checked}
+                  onChange={() => setInquiryType(value)}
+                  className="sr-only"
+                />
+                {INQUIRY_LABELS[value]}
+              </label>
+            );
+          })}
+        </div>
+        {errors.inquiryType ? (
+          <p className="text-xs text-accent">{errors.inquiryType}</p>
+        ) : null}
+      </fieldset>
+
+      <fieldset className="space-y-6" disabled={submitting}>
         <legend className="eyebrow mb-2">Vous</legend>
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-          <Field htmlFor={`${id}-prenom`} label="Prénom" error={errors.prenom}>
+          <Field
+            htmlFor={`${id}-prenom`}
+            label="Prénom"
+            error={errors.prenom}
+          >
             <input
               id={`${id}-prenom`}
               name="prenom"
@@ -257,150 +272,71 @@ export default function ReservationForm() {
         </div>
       </fieldset>
 
-      <fieldset className="space-y-6" disabled={submitting}>
-        <legend className="eyebrow mb-2">Votre venue</legend>
-
-        {/* Meal type — radio group styled as pills */}
-        <Field
-          htmlFor={`${id}-meal-dejeuner`}
-          label="Formule"
-          error={errors.mealType}
-        >
-          <div className="flex flex-wrap gap-3 pt-1">
-            {(
-              [
-                { value: "brunch", label: "Brunch", hours: "8h – 12h" },
-                {
-                  value: "dejeuner",
-                  label: "Déjeuner",
-                  hours: "12h – 17h",
-                },
-              ] as const
-            ).map((opt) => {
-              const checked = mealType === opt.value;
-              return (
-                <label
-                  key={opt.value}
-                  htmlFor={`${id}-meal-${opt.value}`}
-                  className={`relative flex cursor-pointer flex-col gap-0.5 rounded-full border px-5 py-2.5 transition-colors ${
-                    checked
-                      ? "border-primary bg-primary text-bg"
-                      : "border-ink/20 text-ink hover:border-ink/40"
-                  }`}
-                >
-                  <input
-                    id={`${id}-meal-${opt.value}`}
-                    type="radio"
-                    name="mealType"
-                    value={opt.value}
-                    checked={checked}
-                    onChange={() => setMealType(opt.value)}
-                    className="sr-only"
-                  />
-                  <span className="font-serif text-base leading-none">
-                    {opt.label}
-                  </span>
-                  <span
-                    className={`text-[0.65rem] uppercase tracking-[0.16em] ${
-                      checked ? "text-bg/80" : "text-ink-soft"
-                    }`}
-                  >
-                    {opt.hours}
-                  </span>
-                </label>
-              );
-            })}
+      {showDateAndCount ? (
+        <fieldset className="space-y-6" disabled={submitting}>
+          <legend className="eyebrow mb-2">Détails</legend>
+          <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+            <Field
+              htmlFor={`${id}-date`}
+              label="Date envisagée"
+              hint="Optionnel — nous en discuterons ensemble"
+              error={errors.preferredDate}
+            >
+              <input
+                id={`${id}-date`}
+                name="preferredDate"
+                type="date"
+                min={today()}
+                className={inputClass(!!errors.preferredDate)}
+              />
+            </Field>
+            <Field
+              htmlFor={`${id}-count`}
+              label="Nombre de personnes"
+              hint="Approximatif"
+              error={errors.guestCount}
+            >
+              <input
+                id={`${id}-count`}
+                name="guestCount"
+                type="number"
+                min={1}
+                max={2000}
+                inputMode="numeric"
+                placeholder="ex. 40"
+                className={inputClass(!!errors.guestCount)}
+              />
+            </Field>
           </div>
-        </Field>
-
-        <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
-          <Field htmlFor={`${id}-date`} label="Date" error={errors.date}>
-            <input
-              id={`${id}-date`}
-              name="date"
-              type="date"
-              required
-              min={minDate}
-              className={inputClass(!!errors.date)}
-            />
-          </Field>
-          <Field
-            htmlFor={`${id}-time`}
-            label="Heure"
-            hint={
-              mealType === "brunch"
-                ? "Brunch : 8h – 12h"
-                : "Déjeuner : 12h – 17h"
-            }
-            error={errors.time}
-          >
-            <input
-              id={`${id}-time`}
-              name="time"
-              type="time"
-              required
-              min={timeRange.min}
-              max={timeRange.max}
-              placeholder={timeRange.placeholder}
-              className={inputClass(!!errors.time)}
-            />
-          </Field>
-          <Field
-            htmlFor={`${id}-adultes`}
-            label="Adultes"
-            error={errors.adultes}
-          >
-            <input
-              id={`${id}-adultes`}
-              name="adultes"
-              type="number"
-              min={1}
-              max={50}
-              defaultValue={2}
-              required
-              inputMode="numeric"
-              className={inputClass(!!errors.adultes)}
-            />
-          </Field>
-          <Field
-            htmlFor={`${id}-enfants`}
-            label="Enfants"
-            error={errors.enfants}
-          >
-            <input
-              id={`${id}-enfants`}
-              name="enfants"
-              type="number"
-              min={0}
-              max={50}
-              defaultValue={0}
-              inputMode="numeric"
-              className={inputClass(!!errors.enfants)}
-            />
-          </Field>
-        </div>
-      </fieldset>
+        </fieldset>
+      ) : null}
 
       <fieldset className="space-y-6" disabled={submitting}>
-        <legend className="eyebrow mb-2">Une note ?</legend>
+        <legend className="eyebrow mb-2">Votre message</legend>
         <Field
-          htmlFor={`${id}-note`}
-          label="Allergies, occasion, demandes particulières"
-          hint="Optionnel · 500 caractères"
-          error={errors.note}
+          htmlFor={`${id}-message`}
+          label="Décrivez votre projet ou votre demande"
+          hint="1500 caractères maximum"
+          error={errors.message}
         >
           <textarea
-            id={`${id}-note`}
-            name="note"
-            rows={3}
-            maxLength={500}
-            className={`${inputClass(!!errors.note)} resize-y border-b py-3`}
+            id={`${id}-message`}
+            name="message"
+            rows={5}
+            required
+            minLength={10}
+            maxLength={1500}
+            className={`${inputClass(!!errors.message)} resize-y border-b py-3`}
           />
         </Field>
       </fieldset>
 
-      {/* Honeypot — visually hidden, real users won't fill it */}
-      <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden" tabIndex={-1}>
+      {/* Honeypot — visually hidden */}
+      <div
+        aria-hidden="true"
+        className="absolute left-[-9999px] h-0 w-0 overflow-hidden"
+        tabIndex={-1}
+      >
         <label htmlFor={`${id}-website`}>Site web</label>
         <input
           id={`${id}-website`}
@@ -413,8 +349,9 @@ export default function ReservationForm() {
 
       <div className="flex flex-col items-start gap-4 border-t border-hairline pt-8 sm:flex-row sm:items-center sm:justify-between">
         <p className="max-w-sm text-xs italic text-ink-soft">
-          Nous sommes fermés le lundi. Confirmation par téléphone ou
-          e-mail dans la journée.
+          Pour réserver une simple table, appelez-nous directement —
+          ce formulaire est dédié aux événements et aux demandes
+          spéciales.
         </p>
         <button
           type="submit"
