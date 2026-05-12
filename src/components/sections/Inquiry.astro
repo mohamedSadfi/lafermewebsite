@@ -1,6 +1,11 @@
 ---
 import SectionLabel from "~/components/ui/SectionLabel.astro";
-import InquiryForm from "~/components/islands/InquiryForm";
+import { SITE } from "~/data/site";
+
+// Form is built but not mounted — waiting on Mailgun env vars.
+// To restore the form: add `import InquiryForm from "~/components/islands/InquiryForm";`
+// and replace the contact card below with `<InquiryForm client:visible />`.
+const mailSubject = encodeURIComponent("Demande — événement / groupe");
 ---
 
 <section
@@ -20,11 +25,10 @@ import InquiryForm from "~/components/islands/InquiryForm";
         <p class="mt-6 max-w-md text-lg leading-relaxed text-ink-soft">
           Mariage, anniversaire, séminaire d'entreprise, réunion de
           famille de 20 ou 200 personnes, commande pour un hôtel…
-          écrivez-nous l'essentiel et nous revenons vers vous très vite.
+          écrivez ou appelez-nous, nous revenons vers vous très vite.
         </p>
         <p class="mt-8 text-sm italic text-ink-soft">
-          Pour une simple réservation de table, un coup de fil est plus
-          rapide — voir{" "}
+          Pour une simple réservation de table, voir{" "}
           <a
             href="#reserver"
             class="text-primary underline underline-offset-4"
@@ -36,7 +40,86 @@ import InquiryForm from "~/components/islands/InquiryForm";
       </div>
 
       <div class="md:col-span-7">
-        <InquiryForm client:visible />
+        <div class="space-y-4">
+          <a
+            href={`tel:${SITE.contact.phoneTel}`}
+            class="group flex items-center gap-5 rounded-sm border border-hairline bg-surface p-6 transition-colors hover:border-primary md:p-8"
+          >
+            <span
+              aria-hidden="true"
+              class="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-bg transition-transform duration-300 group-hover:rotate-12"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <span class="flex min-w-0 flex-col">
+              <span
+                class="text-[0.7rem] uppercase tracking-[0.18em] text-leaf"
+              >
+                Par téléphone
+              </span>
+              <span
+                class="font-serif text-2xl text-ink sm:text-3xl break-all"
+              >
+                {SITE.contact.phone}
+              </span>
+              <span class="mt-1 text-xs text-ink-soft">
+                {SITE.hours.daysOpen} · {SITE.hours.market.value}
+              </span>
+            </span>
+          </a>
+
+          <a
+            href={`mailto:${SITE.contact.email}?subject=${mailSubject}`}
+            class="group flex items-center gap-5 rounded-sm border border-hairline bg-surface p-6 transition-colors hover:border-primary md:p-8"
+          >
+            <span
+              aria-hidden="true"
+              class="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-bg transition-transform duration-300 group-hover:-rotate-6"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+                <path
+                  d="M22 6l-10 7L2 6"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </span>
+            <span class="flex min-w-0 flex-col">
+              <span
+                class="text-[0.7rem] uppercase tracking-[0.18em] text-leaf"
+              >
+                Par e-mail
+              </span>
+              <span
+                class="font-serif text-2xl text-ink sm:text-3xl break-all"
+              >
+                {SITE.contact.email}
+              </span>
+              <span class="mt-1 text-xs text-ink-soft">
+                Décrivez votre projet, nous répondons sous 24–48 h.
+              </span>
+            </span>
+          </a>
+
+          <p class="pt-4 text-xs italic text-ink-soft">
+            Pour les demandes urgentes, le téléphone reste le plus
+            rapide.
+          </p>
+        </div>
       </div>
     </div>
   </div>
