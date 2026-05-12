@@ -1,0 +1,15 @@
+---
+interface Props {
+  number: string;
+  label: string;
+  class?: string;
+}
+
+const { number, label, class: className = "" } = Astro.props;
+---
+
+<div class={`flex items-center gap-3 ${className}`}>
+  <span class="eyebrow">{number}</span>
+  <span aria-hidden="true" class="block h-px w-8 bg-leaf/60"></span>
+  <span class="eyebrow">{label}</span>
+</div>

@@ -1,0 +1,78 @@
+---
+import { Image } from "astro:assets";
+import landing from "~/assets/hero/landing.jpg";
+import { SITE } from "~/data/site";
+---
+
+<section
+  id="hero"
+  class="relative isolate min-h-[100svh] overflow-hidden bg-ink text-bg"
+>
+  <Image
+    src={landing}
+    alt="Vue de la ferme tuniso-suisse à Turki, Nabeul"
+    widths={[768, 1280, 1920, 2560]}
+    sizes="100vw"
+    quality={82}
+    loading="eager"
+    fetchpriority="high"
+    class="absolute inset-0 h-full w-full object-cover"
+  />
+
+  <!-- Layered scrim for legibility — darker at top + bottom, lighter middle -->
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/20 to-ink/70"
+  ></div>
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(31,42,26,0.45)_85%)]"
+  ></div>
+
+  <div
+    class="container-editorial relative flex min-h-[100svh] flex-col justify-end pt-32 pb-20 md:pb-28"
+  >
+    <div class="max-w-3xl">
+      <p class="eyebrow text-bg/70">Turki · Nabeul · Tunisie</p>
+      <h1
+        class="mt-5 font-serif text-5xl leading-[1.05] tracking-tight sm:text-7xl md:text-[5.5rem]"
+      >
+        La ferme<br />
+        <span class="italic font-light">tuniso<span class="text-accent">-</span>suisse</span>
+      </h1>
+      <p
+        class="mt-6 max-w-xl font-serif text-lg italic text-bg/85 sm:text-xl"
+      >
+        {SITE.tagline} — fruits, légumes, miel et eau de rose cultivés sur place,
+        à deux minutes de l'autoroute A1.
+      </p>
+
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a
+          href="#marche"
+          class="inline-flex items-center justify-center rounded-full bg-bg px-7 py-3.5 text-sm uppercase tracking-wider text-ink transition-colors hover:bg-bg/90"
+        >
+          Découvrir le marché
+        </a>
+        <a
+          href="#visiter"
+          class="inline-flex items-center justify-center rounded-full border border-bg/40 px-7 py-3.5 text-sm uppercase tracking-wider text-bg transition-colors hover:bg-bg/10"
+        >
+          Nous trouver
+        </a>
+      </div>
+    </div>
+
+    <a
+      href="#histoire"
+      aria-label="Faire défiler vers l'histoire"
+      class="absolute bottom-8 right-6 hidden md:flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-bg/70 hover:text-bg transition-colors"
+    >
+      <span>Découvrir</span>
+      <span aria-hidden="true" class="block h-px w-12 bg-current"></span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 5v14M6 13l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</section>

@@ -1,0 +1,82 @@
+---
+import { Image } from "astro:assets";
+import bgImage from "~/assets/extra/farm-2.jpg";
+import { SITE } from "~/data/site";
+---
+
+<section
+  id="evenements"
+  class="relative isolate overflow-hidden bg-ink text-bg scroll-mt-20"
+>
+  <Image
+    src={bgImage}
+    alt=""
+    role="presentation"
+    widths={[768, 1280, 1920]}
+    sizes="100vw"
+    quality={78}
+    loading="lazy"
+    class="absolute inset-0 h-full w-full object-cover opacity-50"
+  />
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 bg-gradient-to-br from-ink/85 via-ink/70 to-ink/90"
+  ></div>
+
+  <div class="container-editorial relative py-24 md:py-32">
+    <div class="grid gap-12 md:grid-cols-12 md:gap-16">
+      <div class="md:col-span-7">
+        <div class="flex items-center gap-3">
+          <span class="eyebrow text-bg/70">04</span>
+          <span aria-hidden="true" class="block h-px w-8 bg-bg/40"></span>
+          <span class="eyebrow text-bg/70">Événements</span>
+        </div>
+
+        <h2 class="mt-8 font-serif text-4xl leading-[1.1] sm:text-5xl md:text-6xl">
+          Privatisez la ferme<br />
+          <span class="italic font-light">pour vos célébrations.</span>
+        </h2>
+
+        <p class="mt-8 max-w-xl text-lg leading-relaxed text-bg/80">
+          Mariages, anniversaires, séminaires, réunions familiales : nous
+          accueillons vos événements dans un cadre verdoyant, avec une
+          cuisine maison et un service personnalisé. Capacité modulable
+          intérieure et extérieure.
+        </p>
+
+        <ul class="mt-10 grid grid-cols-2 gap-6 sm:gap-x-12 max-w-md text-sm text-bg/80">
+          <li class="flex items-center gap-3 border-t border-bg/15 pt-4">
+            <span aria-hidden="true" class="text-accent">·</span> Mariages
+          </li>
+          <li class="flex items-center gap-3 border-t border-bg/15 pt-4">
+            <span aria-hidden="true" class="text-accent">·</span> Anniversaires
+          </li>
+          <li class="flex items-center gap-3 border-t border-bg/15 pt-4">
+            <span aria-hidden="true" class="text-accent">·</span> Séminaires
+          </li>
+          <li class="flex items-center gap-3 border-t border-bg/15 pt-4">
+            <span aria-hidden="true" class="text-accent">·</span> Réceptions
+          </li>
+        </ul>
+
+        <div class="mt-12 flex flex-wrap items-center gap-4">
+          <a
+            href={`tel:${SITE.contact.phoneTel}`}
+            class="inline-flex items-center gap-2 rounded-full bg-bg px-7 py-3.5 text-sm uppercase tracking-wider text-ink transition-colors hover:bg-bg/90"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            {SITE.contact.phone}
+          </a>
+          <a
+            href="#demande"
+            class="inline-flex items-center justify-center rounded-full border border-bg/40 px-7 py-3.5 text-sm uppercase tracking-wider text-bg transition-colors hover:bg-bg/10"
+          >
+            Faire une demande
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+{
+  "name": "La Ferme Tuniso-Suisse",
+  "short_name": "La Ferme",
+  "description": "Marché, restaurant et événements à la ferme tuniso-suisse à Turki, Nabeul.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F7F3EC",
+  "theme_color": "#3E5A2C",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

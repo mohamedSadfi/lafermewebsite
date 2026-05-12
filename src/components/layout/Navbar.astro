@@ -1,0 +1,165 @@
+---
+import { NAV_LINKS } from "~/data/site";
+import Logo from "./Logo.astro";
+---
+
+<header
+  data-navbar
+  class="fixed inset-x-0 top-0 z-50 border-b border-transparent transition-[background-color,border-color,color] duration-300"
+>
+  <div class="container-editorial flex items-center justify-between gap-4 py-4 md:py-5">
+    <Logo />
+
+    <nav
+      aria-label="Navigation principale"
+      class="hidden lg:flex items-center gap-9"
+    >
+      {
+        NAV_LINKS.map((link) => (
+          <a
+            href={link.href}
+            class="text-sm font-medium tracking-wide hover:text-leaf transition-colors"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a
+        href="#demande"
+        class="hidden md:inline-flex items-center justify-center rounded-full bg-primary px-5 py-2.5 text-sm uppercase tracking-wider text-bg transition-colors hover:bg-primary-soft"
+      >
+        Nous contacter
+      </a>
+
+      <button
+        data-menu-toggle
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Ouvrir le menu"
+        class="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-full border border-current/20"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu overlay -->
+  <div
+    id="mobile-menu"
+    data-menu-panel
+    hidden
+    class="lg:hidden fixed inset-0 z-50 bg-bg text-ink"
+  >
+    <div class="container-editorial flex h-full flex-col">
+      <div class="flex items-center justify-between py-4 md:py-5">
+        <Logo />
+        <button
+          data-menu-close
+          type="button"
+          aria-label="Fermer le menu"
+          class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-ink/20"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+          </svg>
+        </button>
+      </div>
+
+      <nav aria-label="Navigation mobile" class="flex flex-1 flex-col justify-center gap-6">
+        {
+          NAV_LINKS.map((link, i) => (
+            <a
+              href={link.href}
+              data-menu-link
+              class="font-serif text-4xl sm:text-5xl text-ink hover:text-primary transition-colors"
+            >
+              <span class="eyebrow text-leaf mr-3 align-top">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              {link.label}
+            </a>
+          ))
+        }
+        <a
+          href="#demande"
+          data-menu-link
+          class="mt-4 inline-flex w-fit items-center justify-center rounded-full bg-primary px-7 py-3.5 text-sm uppercase tracking-wider text-bg transition-colors hover:bg-primary-soft"
+        >
+          Nous contacter
+        </a>
+      </nav>
+
+      <div class="py-6 text-sm text-ink-soft">
+        <p class="font-serif italic">Mardi – Dimanche · Fermé le lundi</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const navbar = document.querySelector<HTMLElement>("[data-navbar]");
+  const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const closeBtn = document.querySelector<HTMLButtonElement>("[data-menu-close]");
+  const panel = document.querySelector<HTMLElement>("[data-menu-panel]");
+  const links = document.querySelectorAll<HTMLAnchorElement>("[data-menu-link]");
+
+  // ---- Scroll appearance ----
+  const onScroll = () => {
+    if (!navbar) return;
+    if (window.scrollY > 80) navbar.dataset.scrolled = "true";
+    else delete navbar.dataset.scrolled;
+  };
+  document.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // ---- Mobile menu ----
+  const setOpen = (open: boolean) => {
+    if (!toggle || !panel) return;
+    if (open) {
+      panel.removeAttribute("hidden");
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-label", "Fermer le menu");
+      document.body.style.overflow = "hidden";
+    } else {
+      panel.setAttribute("hidden", "");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Ouvrir le menu");
+      document.body.style.overflow = "";
+    }
+  };
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = !panel?.hasAttribute("hidden");
+    setOpen(!isOpen);
+  });
+  closeBtn?.addEventListener("click", () => setOpen(false));
+  links.forEach((link) => link.addEventListener("click", () => setOpen(false)));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && panel && !panel.hasAttribute("hidden")) {
+      setOpen(false);
+    }
+  });
+</script>
+
+<style>
+  /* Initial state: transparent, light text (sits over the dark hero) */
+  [data-navbar] {
+    color: #f7f3ec;
+  }
+
+  /* Scrolled past the hero: cream backdrop, dark text */
+  [data-navbar][data-scrolled] {
+    background: rgb(247 243 236 / 0.92);
+    color: #1f2a1a;
+    border-bottom-color: #e5dfd2;
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+  }
+</style>

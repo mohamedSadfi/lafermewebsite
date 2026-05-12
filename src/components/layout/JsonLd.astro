@@ -1,0 +1,41 @@
+---
+import { SITE } from "~/data/site";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "@id": SITE.url,
+  name: SITE.name,
+  alternateName: SITE.shortName,
+  description: SITE.description,
+  url: SITE.url,
+  telephone: SITE.contact.phone,
+  email: SITE.contact.email,
+  servesCuisine: ["Tunisienne", "Méditerranéenne"],
+  priceRange: "€€",
+  acceptsReservations: true,
+  image: new URL("/og-image.jpg", SITE.url).toString(),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: SITE.address.street,
+    postalCode: SITE.address.postalCode,
+    addressLocality: SITE.address.locality,
+    addressRegion: SITE.address.region,
+    addressCountry: SITE.address.countryCode,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: SITE.geo.latitude,
+    longitude: SITE.geo.longitude,
+  },
+  openingHoursSpecification: SITE.openingHoursSpec,
+  sameAs: [SITE.social.facebook],
+  hasMap: SITE.social.googleMaps,
+};
+---
+
+<script
+  type="application/ld+json"
+  is:inline
+  set:html={JSON.stringify(schema)}
+/>
