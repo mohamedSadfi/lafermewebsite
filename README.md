@@ -7,9 +7,11 @@ Construit avec **[Astro](https://astro.build) 5** (basé sur Vite),
 **React** (uniquement pour le formulaire de demande), **Tailwind v4**
 et **Mailgun** pour la livraison des emails. Déployé sur **Vercel**.
 
-Les **réservations de table** se font directement par téléphone.
-Le **formulaire** sur le site est dédié aux demandes plus larges :
-événements privés, grands groupes, commandes en gros, etc.
+Pour les **petites tablées**, pas de réservation : les clients
+viennent quand ils veulent pendant les horaires d'ouverture.
+Le site sert de point de contact pour les **grandes tablées
+(10+ personnes), événements privés et commandes en gros** — section
+*Nous contacter* (#demande).
 
 ---
 
@@ -144,7 +146,7 @@ src/
 ├── components/
 │   ├── layout/              # Navbar, Footer, Logo, JsonLd
 │   ├── sections/            # Hero, Story, Market, Restaurant, Events,
-│   │                        #   Visit, Reservation (CTA tel.), Inquiry (form)
+│   │                        #   Visit, Inquiry (contact card / form)
 │   ├── ui/                  # primitives : Button, SectionLabel, Hairline, StatRow
 │   └── islands/             # composants React (formulaire de demande)
 ├── content/

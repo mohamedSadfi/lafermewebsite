@@ -10,13 +10,14 @@
     "restaurant": "Restaurant",
     "evenements": "Événements",
     "visiter": "Nous trouver",
-    "reserver": "Réserver"
+    "contact": "Nous contacter"
   },
   "cta": {
-    "reserveTable": "Réserver une table",
     "discoverMarket": "Découvrir le marché",
+    "findUs": "Nous trouver",
+    "contactUs": "Nous contacter",
     "contactByPhone": "Nous appeler",
-    "contactByEmail": "Demande par e-mail"
+    "contactByEmail": "Nous écrire"
   },
   "hours": {
     "openDays": "Mardi – Dimanche",
@@ -26,7 +27,7 @@
     "submit": "Envoyer ma demande",
     "submitting": "Envoi…",
     "successTitle": "Demande bien reçue.",
-    "successBody": "Merci ! Nous vous confirmons votre réservation par téléphone ou par e-mail.",
+    "successBody": "Merci ! Nous revenons vers vous très rapidement par téléphone ou par e-mail.",
     "errorGeneric": "Une erreur est survenue. Merci de nous appeler ou de réessayer plus tard.",
     "errorConnection": "Connexion impossible. Merci de réessayer dans un instant.",
     "errorValidation": "Merci de corriger les champs en rouge."
